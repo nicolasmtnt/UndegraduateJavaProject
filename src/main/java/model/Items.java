@@ -26,7 +26,7 @@ public class Items{
      */
     public static void display(){
         for(Item element : items.values()){
-            System.out.println(" Brand : "+element.brand + " Product : "+ element.product);
+            System.out.println(" Brand: "+element.brand + " | Product: "+ element.product);
         }
     }
 
