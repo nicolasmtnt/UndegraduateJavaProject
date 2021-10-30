@@ -1,11 +1,16 @@
 package model;
 
 public class Item{
-    String manufacturer;
-    String name;
+    String brand;
+    String product;
 
-    public Item(String manufacturer, String name){
-        this.manufacturer = manufacturer;
-        this.name = name;
+    /**
+     * 
+     * @param brand
+     * @param product
+     */
+    public Item(String brand, String product){
+        this.brand = brand;
+        this.product = product;
     }
 }
