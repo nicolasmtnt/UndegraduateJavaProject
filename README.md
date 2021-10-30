@@ -1,3 +1,3 @@
 # Undergraduate-Java-Project
-# Nicolas Martinet & Valentin Réault
-# Gestion d'un magazin
+Nicolas Martinet & Valentin Réault
+Gestion d'un magazin
