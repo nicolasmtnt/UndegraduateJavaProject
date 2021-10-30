@@ -7,6 +7,5 @@ public class Item{
     public Item(String manufacturer, String name){
         this.manufacturer = manufacturer;
         this.name = name;
-        System.out.println("Objet crée");
     }
 }
