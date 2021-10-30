@@ -1,4 +1,4 @@
-package mypackage;
+package model;
 
 public class Item{
     String manufacturer;

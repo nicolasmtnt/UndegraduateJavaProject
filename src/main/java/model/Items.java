@@ -1,4 +1,4 @@
-package mypackage;
+package model;
 import java.util.HashMap;
 import java.util.UUID;
 

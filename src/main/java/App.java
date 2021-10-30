@@ -1,4 +1,4 @@
-import mypackage.*;
+import model.*;
 
 
 public class App{
@@ -12,5 +12,4 @@ public class App{
 
 
     }
-
 }
