@@ -1,6 +1,6 @@
-# Undergraduate-Java-Project
-Nicolas Martinet, Valentin Réault, Mohamed Larinouna
-Gestion d'un magazin
+# Undergraduate Java Project | Gestion d'un magazin
+_**Nicolas Martinet, Valentin Réault, Mohamed Larinouna**_
+
 
 ## Première modélisation
 
@@ -8,9 +8,9 @@ Gestion d'un magazin
 
 Le code utilse se trouve dans `src/main/java`.
 Composé de :
-- La class App.java `src/main/java/App.java`
-- Le dossier Gestionnary `src/main/java/Gestionnary`
-- Le dossier Item`src/main/java/Item`
+- [La class App.java](src/main/java/App.java) `src/main/java/App.java`
+- [Le dossier Gestionnary](src/main/java/Gestionnary) `src/main/java/Gestionnary`
+- [Le dossier Item](src/main/java/Item) `src/main/java/Item`
 
 Celle-ci ne prends pas encore en compte la gestion des rayons et de differents magazins
 Aussi la notion d'utilisateur (vendeur, responsable) n'est pas encore programmé
@@ -27,7 +27,7 @@ Items.add("album", new String[]{"Dark Side of the Moon", "1988", "Pink Floyd", "
 Items.display();
 ```
 
-### Ajouter aux stock les article
+### Ajouter aux stock des article crées
 
 Ici on propose d'ajouter 10 articles :
 
