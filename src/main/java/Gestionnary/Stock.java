@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import Item.Items;
 
-public abstract class Stock {
+public class Stock {
 
     static HashMap<UUID,Integer> map = new HashMap<>();
 

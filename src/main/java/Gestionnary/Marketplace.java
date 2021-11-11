@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import Item.Items;
 
-public abstract class Marketplace {
+public class Marketplace {
 
     static HashMap<UUID,Number[]> map = new HashMap<>();
 
@@ -72,5 +72,4 @@ public abstract class Marketplace {
         Stock.add(type, title, year, Math.min((int)map.get(uuid)[0],x));
         substract( type,  title,  year,  x);
     }
-
 }
