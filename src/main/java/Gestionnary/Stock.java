@@ -11,17 +11,17 @@ public class Stock {
 
     /**
      * Ajoute un article au stock
-     * @param type
+     * @param type Prend une valeur parmit : movie, videogame, album
      * @param title
      * @param year
-     * @param x
+     * @param quantity
      */
-    public static void add(String type, String title, String year, int x){
+    public static void add(String type, String title, String year, int quantity){
         UUID uuid = Items.getUUID(type, title, year);
         try{
-            map.put(uuid, map.get(uuid)+x);
+            map.put(uuid, map.get(uuid)+quantity);
         } catch (NullPointerException e){
-            map.put(uuid, x);
+            map.put(uuid, quantity);
         }
     }
 
@@ -36,15 +36,15 @@ public class Stock {
 
     /**
      * Retirer un article du stock
-     * @param type
+     * @param type Prend une valeur parmit : movie, videogame, album
      * @param title
      * @param year
-     * @param x
+     * @param quantity
      */
-    public static void substract(String type, String title, String year, int x){
+    public static void substract(String type, String title, String year, int quantity){
         UUID uuid = Items.getUUID(type, title, year);
         try{
-            map.put(uuid, map.get(uuid)-x);
+            map.put(uuid, map.get(uuid)-quantity);
             if (map.get(uuid)<1){
                 map.remove(uuid);
             }
@@ -55,11 +55,18 @@ public class Stock {
 
     //   Méthodes de transfert
 
-
-    public static void toMarketplace(String type, String title, String year, int x, double price){
+    /**
+     * Mets en rayon un article qui est en stock
+     * @param type Prend une valeur parmit : movie, videogame, album
+     * @param title
+     * @param year
+     * @param quantity
+     * @param price
+     */
+    public static void toMarketplace(String type, String title, String year, int quantity, double price){
         UUID uuid = Items.getUUID(type, title, year);
-        Marketplace.add(type, title, year, Math.min(x, map.get(uuid)), price);
-        substract(type, title, year, x);
+        Marketplace.add(type, title, year, Math.min(quantity, map.get(uuid)), price);
+        substract(type, title, year, quantity);
 
     }
 

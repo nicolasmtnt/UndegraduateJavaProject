@@ -9,15 +9,10 @@ public class Items{
     public static HashMap<UUID,Item> map = new HashMap<>(); // La Map qui contient des item et leurs UUID comme clé
 
     /**
-     * Ajoute un élément à map (l'UUID est généré automatiquement)
-     * @param brand
-     * @param product
+     * Ajoute un produit en ajoutant à map une valeur de clé UUID (généré automatiquement) et un objet item
+     * @param type : Prend une valeur parmit : movie, videogame, album
+     * @param attributs : Les attributs de l'item que l'on veut ajouter à map(le nombre varie en fonction de si item est un album, un film, un jeu-video ...)
      */
-    // public static void add(String brand, String product){
-    //     map.put(UUID.randomUUID(), new Item(brand,product));
-    //     System.out.println(product = " ajouté(e)");
-    // }
-
     public static void add(String type, String[] attributs){
         switch (type) {
             case "album":
@@ -40,7 +35,7 @@ public class Items{
 
 
     /**
-     * Affiche tous les objects(Item) de map (HashMap)
+     * Affiche tous les produits (item) de map (HashMap)
      */
     public static void display(){
         for(Item element : map.values()){
@@ -49,9 +44,9 @@ public class Items{
     }
 
     /**
-     * Cherche un Item de Items et renvoie son UUID (Key)
+     * Recherche un produit enregistré en parcourant map à la recherche d'un titre et d'une année correspondant
      * Not case sensitive
-     * @param type
+     * @param type Prend une valeur parmit : movie, videogame, album
      * @param title
      * @param year
      * @return uuid
