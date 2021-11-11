@@ -1,4 +1,4 @@
-# Undergraduate Java Project | Gestion d'un magazin
+# Projet Java-Objet | Gestion d'un magazin
 _**Nicolas Martinet, Valentin Réault, Mohamed Larinouna**_
 
 
@@ -6,9 +6,9 @@ _**Nicolas Martinet, Valentin Réault, Mohamed Larinouna**_
 
 ![Première modélisation](temporaryModel1.png)
 
-Le code utilse se trouve dans `src/main/java`.
+Le code se trouve dans `src/main/java`.
 Composé de :
-- [La class App.java](src/main/java/App.java) `src/main/java/App.java`
+- [La classe App.java](src/main/java/App.java) `src/main/java/App.java`
 - [Le dossier Gestionnary](src/main/java/Gestionnary) `src/main/java/Gestionnary`
 - [Le dossier Item](src/main/java/Item) `src/main/java/Item`
 
@@ -48,4 +48,4 @@ Stock.toMarketplace("album","Dark Side of the Moon","1988",5, 9.99);
 ![Première modélisation](tamporarymodel2.png)
 
 1. Ajouter la notion d'utilisateur et de panier
-2. à determiner
+2. `À determiner
