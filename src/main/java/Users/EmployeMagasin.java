@@ -1,15 +1,11 @@
-import java.util.HashMap;
-import java.util.UUID;
-
-public class Client implements IUtilisateur{
+package Users;
+public class EmployeMagasin implements IUtilisateur{
   public String pseudoUnique;
   public String passWord;
-  public Panier panier;
 
   public Client(String pseudoUnique, String passWord){
     this.pseudoUnique = pseudoUnique;
     this.passWord = passWord;
-    this.panier = new Panier;
 
     //On enregistre le nouveau client dans un fihchier nous servant de Base de données
     String PseudoMdr = this.pseudoUnique + " " + this.passWord; //Dans un fichier on stock pseudo et mdp; ex : "Babar soleil31"
@@ -18,13 +14,10 @@ public class Client implements IUtilisateur{
     writer.close();
   }
 
-  public HashMap<UUID,Integer> getPanier(){
-    return this.panier.getPanier();
+  public String toString(){
+    return "(EmployeMagasin)  Pseudo : " + this.pseudoUnique + "mdp : " + this.passWord;
   }
 
-  public String toString(){
-    return "(CLIENT)  Pseudo : " + this.pseudoUnique + "mdp : " + this.passWord;
-  }
 
 
   public ArrayList<Magasin>() voirListeMagasin(){
@@ -54,4 +47,13 @@ public class Client implements IUtilisateur{
   public void acheterProduit(){
 
   }
+
+  public void ajouterProduitStock(){*
+
+  }
+
+  public void ajouterProduitRayon(){
+
+  }
 }
+

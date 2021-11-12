@@ -65,9 +65,23 @@ public class Stock {
      */
     public static void toMarketplace(String type, String title, String year, int quantity, double price){
         UUID uuid = Items.getUUID(type, title, year);
-        Marketplace.add(type, title, year, Math.min(quantity, map.get(uuid)), price);
-        substract(type, title, year, quantity);
+        switch (type){
+            case "movie":
+                RayonMovie.add(title, year, Math.min(quantity, map.get(uuid)), price);
+                substract(type, title, year, quantity);
+                break;
 
+            case "videogame":
+                RayonMovie.add(title, year, Math.min(quantity, map.get(uuid)), price);
+                substract(type, title, year, quantity);
+                break;
+            
+            case "album":
+                RayonMovie.add(title, year, Math.min(quantity, map.get(uuid)), price);
+                substract(type, title, year, quantity);
+                break;
+
+        }
     }
 
 }

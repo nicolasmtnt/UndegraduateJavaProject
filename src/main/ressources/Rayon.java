@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import Item.Items;
 
-public class Marketplace {
+public class Rayon{
 
     static HashMap<UUID,Number[]> map = new HashMap<>();
 

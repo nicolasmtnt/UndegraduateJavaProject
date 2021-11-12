@@ -20,16 +20,17 @@ public class App{
         
         // Manipulation :
         Stock.toMarketplace("videogame","Super Mario bros","2019",10, 59.99);
-        Marketplace.display();
+        RayonVideogame.display();
         Stock.display();
         System.out.println("\n");
 
-        Marketplace.toStock("videogame","Super Mario bros","2019",10);
-        Marketplace.display();
+        RayonVideogame.toStock("Super Mario bros","2019",10);
         Stock.display();
-        Marketplace.display();
+        RayonVideogame.display();
 
         System.out.println(" ************ FIN DU PROGRAMME ************\n");
+
+        System.out.println(Items.getUUID("movie", "Star Wars", "2010"));
 
     }
 }

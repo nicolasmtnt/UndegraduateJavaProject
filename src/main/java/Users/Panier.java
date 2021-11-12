@@ -1,5 +1,7 @@
+package Users;
 import java.util.HashMap;
 import java.util.UUID;
+
 
 public class Panier{
   private HashMap<UUID,Integer> listeProduit;
@@ -16,3 +18,4 @@ public class Panier{
 
   }
 }
+
