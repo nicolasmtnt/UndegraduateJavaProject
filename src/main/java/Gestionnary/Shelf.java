@@ -1,30 +1,34 @@
 package Gestionnary;
-
 import java.util.HashMap;
 import java.util.UUID;
 
 import Item.Items;
 
-public class RayonAlbum{
+public class Shelf {
+    HashMap<UUID,Number[]> map;
+    String category;
+    
 
-    static HashMap<UUID,Number[]> map = new HashMap<>();
-    static String type = "Album";
+    public Shelf(String category, UUID uuid, int quantity, double price) {
+        this.category = category;
+        this.map = new HashMap<>();
+        map.put(uuid, new Number[]{quantity, price});
+    }
     /**
      * Ajoute un élement à la vente
      * Doit normalement seulement être utilisé par la fonction toStock() et toMarketplace() pour que l'article ne viennent pas de nulle part
-     * @param type Prend une valeur parmit : movie, videogame, album
+     * @param category Prend une valeur parmit : movie, videogame, album
      * @param title
      * @param year
      * @param quantity
      * @param price // donnée spécifique aux articles à vendre
      */
-    public static void add(String type, String title, String year, int quantity, double price){
-        UUID uuid = Items.getUUID(type, title, year);
+    public void add(UUID uuid, int quantity, double price){
         try{
             if((double)map.get(uuid)[1] != price){
                 // Voulez vous changez le prix de vente de l'article (y/n) ?
             }
-            map.put(uuid, new Number[]{(int)map.get(uuid)[1]+quantity,price});
+            map.put(uuid, new Number[]{(int)map.get(uuid)[0]+quantity, (double)price});
         } catch (NullPointerException e){
             map.put(uuid, new Number[]{(int)quantity, (double)price});
         }
@@ -32,22 +36,22 @@ public class RayonAlbum{
     /**
      * Affiche l'ensemble des articles en ventes, leurs prix et la quantité en magazin
      */
-    public static void display(){
+    public void display(){
         for(HashMap.Entry<UUID, Number[]> entry : map.entrySet()){
-            System.out.println(Items.getValue(entry.getKey()) + " , quantité : " + entry.getValue()[0] + " , prix : " + entry.getValue()[1]+"€");
+            System.out.println(Items.getValue(entry.getKey()) + ", quantité : " + entry.getValue()[0] + " , prix : " + entry.getValue()[1]+"€");
         }
     }
 
     /**
      * Retire un element de la vente
      * Doit normalement seulement être utilisé par la fonction toStock() et marketplace()
-     * @param type Prend une valeur parmit : movie, videogame, album
+     * @param category Prend une valeur parmit : movie, videogame, album
      * @param title
      * @param year
      * @param quantity
      */
-    public static void substract(String title, String year, int quantity){
-        UUID uuid = Items.getUUID(type, title, year);
+    public void substract(String title, String year, int quantity){
+        UUID uuid = Items.getUUID(category, title, year);
         try{
             map.put(uuid, new Number[]{(int)map.get(uuid)[0]-quantity, map.get(uuid)[1]});
             if ((int)map.get(uuid)[0]<1){
@@ -62,16 +66,16 @@ public class RayonAlbum{
 
     /**
      * Renvoie un article en vente vers le stock
-     * @param type Prend une valeur parmit : movie, videogame, album
+     * @param category Prend une valeur parmit : movie, videogame, album
      * @param title
      * @param year
      * @param quantity
      */
 
-    public static void toStock(String title, String year, int quantity){
-        UUID uuid = Items.getUUID(type, title, year);
+    public void toStock(String title, String year, int quantity){
+        UUID uuid = Items.getUUID(category, title, year);
         try {
-            Stock.add(type, title, year, Math.min((int)map.get(uuid)[0],quantity));
+            Stock.add(category, title, year, Math.min((int)map.get(uuid)[0],quantity));
             substract(title, year, quantity);
             
         } catch (Exception e) {

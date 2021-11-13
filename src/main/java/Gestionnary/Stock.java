@@ -29,9 +29,11 @@ public class Stock {
      * Affiche l'ensemble des articles en stock
      */
     public static void display(){
+        System.out.println("Liste des éléments en stock :");
         for(HashMap.Entry<UUID, Integer> entry : map.entrySet()){
             System.out.println(Items.getValue(entry.getKey()) + " , quantité : " + entry.getValue());
         }
+        System.out.println("");
     }
 
     /**
@@ -55,32 +57,15 @@ public class Stock {
 
     //   Méthodes de transfert
 
-    /**
-     * Mets en rayon un article qui est en stock
-     * @param type Prend une valeur parmit : movie, videogame, album
-     * @param title
-     * @param year
-     * @param quantity
-     * @param price
-     */
-    public static void toMarketplace(String type, String title, String year, int quantity, double price){
-        UUID uuid = Items.getUUID(type, title, year);
-        switch (type){
-            case "movie":
-                RayonMovie.add(title, year, Math.min(quantity, map.get(uuid)), price);
-                substract(type, title, year, quantity);
-                break;
 
-            case "videogame":
-                RayonMovie.add(title, year, Math.min(quantity, map.get(uuid)), price);
-                substract(type, title, year, quantity);
-                break;
-            
-            case "album":
-                RayonMovie.add(title, year, Math.min(quantity, map.get(uuid)), price);
-                substract(type, title, year, quantity);
-                break;
-
+    static public void toMarketplace(String category, String title, String year, int quantity, double price){
+        UUID uuid = Items.getUUID(category, title, year);
+        try {
+            Marketplace.get(category).add(uuid, quantity, price);
+            substract(category, title, year, quantity);
+        } catch (NullPointerException e) {
+            Marketplace.put(category, new Shelf(category, uuid, quantity, price));
+            substract(category, title, year, quantity);
         }
     }
 

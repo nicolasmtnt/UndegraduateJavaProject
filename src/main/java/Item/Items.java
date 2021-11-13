@@ -38,9 +38,11 @@ public class Items{
      * Affiche tous les produits (item) de map (HashMap)
      */
     public static void display(){
+        System.out.println("Liste des Produits enregistrés :");
         for(Item element : map.values()){
             System.out.println(element.toString());
         }
+        System.out.println("");
     }
 
     /**
@@ -67,9 +69,11 @@ public class Items{
      * @param uuid
      * @return
      */
-    public static String getValue(UUID uuid){
-        return map.get(uuid).toString();
+    public static Item getValue(UUID uuid){
+        return map.get(uuid);
     }
+
+    
 }
 
 

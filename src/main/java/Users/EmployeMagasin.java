@@ -1,4 +1,6 @@
 package Users;
+
+
 public class EmployeMagasin implements IUtilisateur{
   public String pseudoUnique;
   public String passWord;
