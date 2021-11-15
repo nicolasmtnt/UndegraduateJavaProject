@@ -19,12 +19,21 @@ Aussi la notion d'utilisateur (vendeur, responsable) n'est pas encore programmé
 
 ```
 Items.add("album", new String[]{"Dark Side of the Moon", "1988", "Pink Floyd", "Universal"});
+Items.add("movie", new String[]{"Star Wars","2010","George Lucas","Lucasfilm"});
 ```
+
+### Ajouter un article dans le stock
+
+```
+Stock.add("movie", "Star Wars", "2010", 50)
+```
+
 
 ### Afficher les article
 
 ```
 Items.display();
+Stock.display();
 ```
 
 ### Ajouter aux stock des article crées
@@ -32,20 +41,25 @@ Items.display();
 Ici on propose d'ajouter 10 articles :
 
 ```
-Stock.add("album", "Dark Side of the Moon","1988", 10)
+Stock.add("album", "Dark Side of the Moon","1988", 50)
 ```
 
 ### Mettre en vente un article qui se trouve dans les stocks
 
-Ici on propose de vendre `5` albums `Dark Side of the Moon` à `9.99`€
-
+Ici mets en vente `5` albums `Dark Side of the Moon` à `9.99`€
 ```
-Stock.toMarketplace("album","Dark Side of the Moon","1988",5, 9.99);
+Stock.toMarketplace("albums", "Dark Side of the Moon", "2010", 10, 9.99);
+```
+
+Ici on ajoute `2` albums `Dark Side of the Moon` au meme prix (Comportement du programme non encore défini si le prix est différent
+```
+Stock.toMarketplace("albums", "Dark Side of the Moon", "2010", 2, 9.99);
 ```
 
 ## Prochaine modelisation
 
 ![Première modélisation](tamporarymodel2.png)
 
-1. Ajouter la notion d'utilisateur et de panier
-2. `À determiner
+1. Etape en cours de réalisation : construction d'un Shell pour que le responsable du magazin puisse interagir avec le programme de facon plus intuitive (Command Line Interface)
+2. Ajouter la notion d'utilisateur et de panier
+3. À determiner
