@@ -22,12 +22,13 @@ Items.add("album", new String[]{"Dark Side of the Moon", "1988", "Pink Floyd", "
 Items.add("movie", new String[]{"Star Wars","2010","George Lucas","Lucasfilm"});
 ```
 
-### Ajouter un article dans le stock
+### Ajouter aux stock des article crées
+
+Ici on propose d'ajouter 50 articles :
 
 ```
-Stock.add("movie", "Star Wars", "2010", 50)
+Stock.add("album", "Dark Side of the Moon","1988", 50)
 ```
-
 
 ### Afficher les article
 
@@ -36,13 +37,6 @@ Items.display();
 Stock.display();
 ```
 
-### Ajouter aux stock des article crées
-
-Ici on propose d'ajouter 10 articles :
-
-```
-Stock.add("album", "Dark Side of the Moon","1988", 50)
-```
 
 ### Mettre en vente un article qui se trouve dans les stocks
 
