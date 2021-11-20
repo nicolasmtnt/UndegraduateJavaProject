@@ -10,7 +10,7 @@ public class App{
 
         // Création d'élements : 
         Items.add("album", new String[]{"Dark Side of the Moon", "1988", "Pink Floyd", "Universal"});
-        Items.add("videogame", new String[]{"Super Mario bros","2019","Nintendo","Nintendo","81"});
+        Items.add("videogame", new String[]{"Super Mario bros","2019","Nintendo","Nintendo"});
         Items.add("movie", new String[]{"Star Wars","2010","George Lucas","Lucasfilm"});
         Items.add("movie", new String[]{"Star Wars","2010","George Lucas","Lucasfilm"}); // ajouter truc pour empecher doublon
         Items.display();

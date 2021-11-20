@@ -3,7 +3,6 @@ package Item;
 import java.util.HashMap;
 import java.util.UUID;
 
-
 public class Items{
 
     public static HashMap<UUID,Item> map = new HashMap<>(); // La Map qui contient des item et leurs UUID comme clé
@@ -17,22 +16,24 @@ public class Items{
         switch (type) {
             case "album":
                 map.put(UUID.randomUUID(), new Album(attributs[0], attributs[1], attributs[2], attributs[3]));
+                System.out.println("Produit ajouté !");
                 break;
         
             case "videogame" :
-                map.put(UUID.randomUUID(), new VideoGame(attributs[0], attributs[1], attributs[2], attributs[3], attributs[4]));
+                map.put(UUID.randomUUID(), new VideoGame(attributs[0], attributs[1], attributs[2], attributs[3]));
+                System.out.println("Produit ajouté !");
                 break;
 
             case "movie":
                 map.put(UUID.randomUUID(), new Movie(attributs[0], attributs[1], attributs[2], attributs[3]));
+                System.out.println("Produit ajouté !");
                 break;
         
             default:
-                System.out.println("Operation failed : The '"+type +"' type of item is not defined for the marketplace");
+                System.out.println("Operation failed : The '"+type +"' type of item is not defined by the system");
                 break;
         }
     }
-
 
     /**
      * Affiche tous les produits (item) de map (HashMap)

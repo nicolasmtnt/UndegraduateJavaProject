@@ -5,11 +5,10 @@ public class VideoGame extends Item{
     String developer;
     int metascore;
 
-    public VideoGame(String title, String year, String publisher, String developer, String metascore) {
+    public VideoGame(String title, String year, String publisher, String developer) {
         super(title, year);
         this.publisher = publisher;
         this.developer = developer;
-        this.metascore = Integer.parseInt(metascore);
     }
 
     @Override
