@@ -76,17 +76,17 @@ public class Items{
         return map.get(uuid);
     }
 
-    public static boolean searchItem(Item item, String str){
+    public static boolean scan(Item item, String str){
         if(item.toString().toLowerCase().contains(str.toLowerCase())){
             return true;
         }
         return false;
     }
 
-    public static ArrayList<UUID> searchItems(String str){
+    public static ArrayList<UUID> search(String str){
         ArrayList<UUID> foundItems = new ArrayList<>();
         for(HashMap.Entry<UUID,Item> element : map.entrySet()){
-            if(searchItem(element.getValue(),str)){
+            if(scan(element.getValue(),str)){
                 foundItems.add(element.getKey());
                 System.out.println("["+foundItems.size()+"] "+element.getValue().toString());
             }

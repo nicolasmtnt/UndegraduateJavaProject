@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import Gestionnary.Marketplace;
 import Gestionnary.Stock;
 import Item.Items;
 
@@ -28,16 +29,28 @@ public class Shell {
                     Items.display();
                     commandEnd();
                     break;
-                case "stock":
+                case "addstock":
                     addStock();
                     commandEnd();
                     break;
+                case "displaystock":
+                    Stock.display();;
+                    commandEnd();
+                    break;
+                case "addsell":
+                    addSell();
+                    commandEnd();           
+                    break;
+
+
+
                 case "help":
                     displayCommandHelp();
                     break;
                 case "quitter":
                     running = false;
                     System.out.println("*********** ARRET DU PROGRAMME *********** ");
+                    break;
                 default:
                     System.out.println("Commande non trouvée");
                     break;
@@ -50,7 +63,10 @@ public class Shell {
         +" * new : Ajouter un article dans le système \n"
         +" * display : Afficher les articles enregistrés dans le système \n"
         +" * help : Afficher la liste des commandes disponibles\n"
-        +" * stock : Ajouter un produit au stock\n"
+        +" * addstock : Ajouter un produit au stock\n"
+        +" * displaystock : Afficher les articles en stock\n"
+        +" * addsell : Ajouter un produit (au préalable en stock) à la vente \n"
+        +" * quitter : Quitter le programme \n"
         );
     }
 
@@ -136,10 +152,15 @@ public class Shell {
     }
 
 
+
     static void addStock() throws IOException{
         System.out.println("Recherchez un produit (nom, auteurs ...) : ");
         String input = userInput();
-        ArrayList<UUID> foundItems = Items.searchItems(input);
+        ArrayList<UUID> foundItems = Items.search(input);
+        if(foundItems.size()==0){
+            System.out.println("Aucun produit trouvé");
+            return;
+        }
         try {
             System.out.println("Entrez le [numéro] du produit : ");
             String id = userInput();
@@ -152,6 +173,31 @@ public class Shell {
         } catch (IndexOutOfBoundsException e){
             System.out.println("Erreur : Le numéro entrée ne fait pas partie des résultats de la recherche");
         }
+    }
+
+
+        static void addSell() throws IOException{
+            System.out.println("Recherchez un produit (nom, auteurs ...) : ");
+            String input = userInput();
+            ArrayList<UUID> foundItems = Stock.search(input);
+            if(foundItems.size()==0){
+                System.out.println("Aucun produit trouvé");
+                return;
+            }
+            try {
+                System.out.println("Entrez le [numéro] du produit : ");
+                String id = userInput();
+                int index = Integer.parseInt(id)-1;
+                System.out.println("Entrez la quantité : ");
+                String quantity = userInput();
+                System.out.println("Entrez le prix (avec . et non ,): ");
+                String price = userInput();
+                Marketplace.add(foundItems.get(index), Integer.parseInt(quantity), Float.parseFloat(price));
+            } catch (NumberFormatException e) {
+                System.out.println("Erreur : La valeur entrée n'est pas un nombre");
+            } catch (IndexOutOfBoundsException e){
+                System.out.println("Erreur : Le numéro entrée ne fait pas partie des résultats de la recherche");
+            }
         
         
     }

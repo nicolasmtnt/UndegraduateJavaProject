@@ -1,8 +1,10 @@
 package Gestionnary;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import Item.Item;
 import Item.Items;
 
 public class Stock {
@@ -23,7 +25,14 @@ public class Stock {
         } catch (NullPointerException e){
             map.put(uuid, quantity);
         }
-        
+    }
+
+    public static Integer getValue(UUID uuid){
+        return map.get(uuid);
+    }
+
+    public static Integer changeValue(UUID uuid, Integer x){
+        return map.put(uuid, x);
     }
 
     public static void add(UUID uuid, int quantity){
@@ -77,6 +86,24 @@ public class Stock {
             Marketplace.put(category, new Shelf(category, uuid, quantity, price));
             substract(category, title, year, quantity);
         }
+    }
+
+    public static boolean scan(Item item, String str){
+        if(item.toString().toLowerCase().contains(str.toLowerCase())){
+            return true;
+        }
+        return false;
+    }
+
+    public static ArrayList<UUID> search(String str){
+        ArrayList<UUID> foundItems = new ArrayList<>();
+        for(HashMap.Entry<UUID,Integer> element : map.entrySet()){
+            if(scan(Items.getValue(element.getKey()),str)){
+                foundItems.add(element.getKey());
+                System.out.println("["+foundItems.size()+"] "+Items.getValue(element.getKey()).toString()+ "quantité ("+element.getValue().toString()+")");
+            }
+        }
+        return foundItems;
     }
 
 }
