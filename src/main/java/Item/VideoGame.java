@@ -13,7 +13,7 @@ public class VideoGame extends Item{
 
     @Override
     public String toString() {
-        return "VideoGame [title=" + title + ", year=" + year + ", developer=" + developer + ", metascore=" + metascore + ", publisher=" + publisher + "]";
+        return "VideoGame," + title + "," + year + "," + developer + "," + publisher;
     }
     
 

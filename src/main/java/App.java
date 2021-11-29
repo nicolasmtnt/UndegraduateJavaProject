@@ -1,10 +1,13 @@
 
+import java.io.ObjectInputStream.GetField;
+import java.lang.reflect.Field;
+
 import Gestionnary.*;
 import Item.Items;
 
 
 public class App{
-    public static void main(String[] args){
+    public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException{
 
         System.out.println("\n ************ DEBUT DU PROGRAMME ************");
 
@@ -24,11 +27,10 @@ public class App{
 
         Marketplace.display();
         Stock.display();
-
-
         
         System.out.println(" ************ FIN DU PROGRAMME ************\n");
 
+        System.out.println(Items.getValue(Items.getUUID("movie", "Star Wars","2010")).toString());
 
     }
 }

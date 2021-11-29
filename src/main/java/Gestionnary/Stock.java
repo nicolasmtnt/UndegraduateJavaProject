@@ -23,6 +23,16 @@ public class Stock {
         } catch (NullPointerException e){
             map.put(uuid, quantity);
         }
+        
+    }
+
+    public static void add(UUID uuid, int quantity){
+        try{
+            map.put(uuid, map.get(uuid)+quantity);
+        } catch (NullPointerException e){
+            map.put(uuid, quantity);
+        }
+        System.out.println("Produit ajouté au stock");
     }
 
     /**

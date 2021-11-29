@@ -1,10 +1,19 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.UUID;
 
+import Gestionnary.Stock;
 import Item.Items;
 
-public class Shell {    public static void main(String[] args) throws IOException {
+public class Shell {
+    public static void main(String[] args) throws IOException {
+        Items.add("album", new String[]{"Dark Side of the Moon", "1988", "Pink Floyd", "Universal"});
+        Items.add("videogame", new String[]{"Super Mario bros","2019","Nintendo","Nintendo"});
+        Items.add("movie", new String[]{"Star Wars","2010","George Lucas","Lucasfilm"});
+        Items.add("movie", new String[]{"Star Wars","2010","George Lucas","Lucasfilm"});
+        //
         Boolean running = true;
         System.out.println(" *********** LANCEMENT DU PROGRAMME *********** \n");
         displayCommandHelp();
@@ -17,6 +26,10 @@ public class Shell {    public static void main(String[] args) throws IOExceptio
                     break;
                 case "display":
                     Items.display();
+                    commandEnd();
+                    break;
+                case "stock":
+                    addStock();
                     commandEnd();
                     break;
                 case "help":
@@ -37,6 +50,7 @@ public class Shell {    public static void main(String[] args) throws IOExceptio
         +" * new : Ajouter un article dans le système \n"
         +" * display : Afficher les articles enregistrés dans le système \n"
         +" * help : Afficher la liste des commandes disponibles\n"
+        +" * stock : Ajouter un produit au stock\n"
         );
     }
 
@@ -120,6 +134,28 @@ public class Shell {    public static void main(String[] args) throws IOExceptio
         System.out.println("Entrez le nom du label : ");
         return userInput();
     }
+
+
+    static void addStock() throws IOException{
+        System.out.println("Recherchez un produit (nom, auteurs ...) : ");
+        String input = userInput();
+        ArrayList<UUID> foundItems = Items.searchItems(input);
+        try {
+            System.out.println("Entrez le [numéro] du produit : ");
+            String id = userInput();
+            int index = Integer.parseInt(id)-1;
+            System.out.println("Entrez la quantité : ");
+            String quantity = userInput();
+            Stock.add(foundItems.get(index), Integer.parseInt(quantity));
+        } catch (NumberFormatException e) {
+            System.out.println("Erreur : La valeur entrée n'est pas un nombre");
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("Erreur : Le numéro entrée ne fait pas partie des résultats de la recherche");
+        }
+        
+        
+    }
+
 
     static void commandEnd(){
         System.out.println("\nNouvelle commande :");

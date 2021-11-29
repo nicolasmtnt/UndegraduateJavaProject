@@ -12,7 +12,7 @@ public class Album extends Item {
 
     @Override
     public String toString() {
-        return "Album [title=" + title + ", year=" + year + ", artist=" + artist + ", label=" + label + "]";
+        return "Album," + title + "," + year + "," + artist + "," + label;
     }
 
 }
