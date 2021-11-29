@@ -15,6 +15,16 @@ Composé de :
 Celle-ci ne prends pas encore en compte la gestion des rayons et de differents magazins
 Aussi la notion d'utilisateur (vendeur, responsable) n'est pas encore programmé
 
+## Utilisation avec .jar
+
+Pour lancer le programme, executer avec le terminal la commande ( dans le directory de la racine du projet)
+```
+java -jar JavaProject.jar
+```
+
+
+## Utilisation avec App.java
+
 ### Ajouter un article
 
 ```
