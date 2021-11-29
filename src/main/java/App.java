@@ -1,13 +1,11 @@
 
-import java.io.ObjectInputStream.GetField;
-import java.lang.reflect.Field;
-
+import java.io.IOException;
 import Gestionnary.*;
 import Item.Items;
 
 
 public class App{
-    public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException{
+    public static void main(String[] args) throws IOException{
 
         System.out.println("\n ************ DEBUT DU PROGRAMME ************");
 

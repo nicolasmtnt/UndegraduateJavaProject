@@ -1,7 +1,5 @@
 package Item;
 
-import java.util.List;
-
 public class Item{
     String title;
     String year;

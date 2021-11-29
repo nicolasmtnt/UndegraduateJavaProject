@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import Item.Item;
+import Interface.Scannable;
 import Item.Items;
 
-public class Stock {
+public class Stock implements Scannable{
 
     static HashMap<UUID,Integer> map = new HashMap<>();
 
@@ -88,17 +88,12 @@ public class Stock {
         }
     }
 
-    public static boolean scan(Item item, String str){
-        if(item.toString().toLowerCase().contains(str.toLowerCase())){
-            return true;
-        }
-        return false;
-    }
+
 
     public static ArrayList<UUID> search(String str){
         ArrayList<UUID> foundItems = new ArrayList<>();
         for(HashMap.Entry<UUID,Integer> element : map.entrySet()){
-            if(scan(Items.getValue(element.getKey()),str)){
+            if(Scannable.scan(Items.getValue(element.getKey()),str)){
                 foundItems.add(element.getKey());
                 System.out.println("["+foundItems.size()+"] "+Items.getValue(element.getKey()).toString()+ "quantité ("+element.getValue().toString()+")");
             }

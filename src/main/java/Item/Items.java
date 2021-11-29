@@ -1,11 +1,16 @@
 package Item;
 
-import java.lang.reflect.Field;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class Items{
+import Interface.Scannable;
+
+public class Items implements Scannable{
 
     public static HashMap<UUID,Item> map = new HashMap<>(); // La Map qui contient des item et leurs UUID comme clé
 
@@ -13,16 +18,18 @@ public class Items{
      * Ajoute un produit en ajoutant à map une valeur de clé UUID (généré automatiquement) et un objet item
      * @param type : Prend une valeur parmit : movie, videogame, album
      * @param attributs : Les attributs de l'item que l'on veut ajouter à map(le nombre varie en fonction de si item est un album, un film, un jeu-video ...)
+     * @throws IOException
      */
-    public static void add(String type, String[] attributs){
+    public static void add(String type, String[] attributs) throws IOException{
+        UUID uuid = UUID.randomUUID();
+        File file = new File("src/main/ressources/database.csv");
+        BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
+        String message;
         switch (type) {
             case "album":
-                UUID uuid = UUID.randomUUID();
                 map.put(uuid, new Album(attributs[0], attributs[1], attributs[2], attributs[3]));
 
-                File file = new File("../ressources/database.txt");
-                BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
-                String message = uuid.toString() + "," + attributs[0] + attributs[1] + attributs[2] + attributs[3];
+                message = uuid.toString() + "," + attributs[0] + "," +  attributs[1] + "," + attributs[2] + "," + attributs[3]+"\n";
                 fo.write(message);
                 fo.close();
 
@@ -30,12 +37,8 @@ public class Items{
                 break;
 
             case "videogame" :
-                UUID uuid = UUID.randomUUID();
                 map.put(uuid, new VideoGame(attributs[0], attributs[1], attributs[2], attributs[3]));
-
-                File file = new File("../ressources/database.txt");
-                BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
-                String message = uuid.toString() + "," + attributs[0] + attributs[1] + attributs[2] + attributs[3];
+                message = uuid.toString() + "," + attributs[0] + "," + attributs[1] + "," + attributs[2] + "," + attributs[3]+"\n";
                 fo.write(message);
                 fo.close();
 
@@ -43,12 +46,8 @@ public class Items{
                 break;
 
             case "movie":
-                UUID uuid = UUID.randomUUID();
                 map.put(uuid, new Movie(attributs[0], attributs[1], attributs[2], attributs[3]));
-
-                File file = new File("../ressources/database.txt");
-                BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
-                String message = uuid.toString() + "," + attributs[0] + attributs[1] + attributs[2] + attributs[3];
+                message = uuid.toString() + "," + attributs[0] + "," + attributs[1] + "," + attributs[2] + "," + attributs[3]+"\n";
                 fo.write(message);
                 fo.close();
 
@@ -100,17 +99,10 @@ public class Items{
         return map.get(uuid);
     }
 
-    public static boolean scan(Item item, String str){
-        if(item.toString().toLowerCase().contains(str.toLowerCase())){
-            return true;
-        }
-        return false;
-    }
-
     public static ArrayList<UUID> search(String str){
         ArrayList<UUID> foundItems = new ArrayList<>();
         for(HashMap.Entry<UUID,Item> element : map.entrySet()){
-            if(scan(element.getValue(),str)){
+            if(Scannable.scan(element.getValue(),str)){
                 foundItems.add(element.getKey());
                 System.out.println("["+foundItems.size()+"] "+element.getValue().toString());
             }
