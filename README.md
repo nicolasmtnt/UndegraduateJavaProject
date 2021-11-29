@@ -1,10 +1,22 @@
 # Projet Java-Objet | Gestion d'un magazin
 _**Nicolas Martinet, Valentin Réault, Mohamed Larinouna**_
 
-
-## Première modélisation
-
 ![Première modélisation](temporaryModel1.png)
+
+
+## Telecharger le programme
+
+- [Télécharger le programme (.jar)](https://github.com/nicolasmtnt/undegraduate-java-project/raw/main/JavaProject.jar)
+
+### Utilisation avec [.jar](JavaProject.jar)
+
+Pour lancer le programme, executer avec le terminal la commande ( dans le directory de la racine du projet)
+```
+java -jar JavaProject.jar
+```
+
+
+## Utilisation avec App.java
 
 Le code se trouve dans `src/main/java`.
 Composé de :
@@ -14,6 +26,7 @@ Composé de :
 
 Celle-ci ne prends pas encore en compte la gestion des rayons et de differents magazins
 Aussi la notion d'utilisateur (vendeur, responsable) n'est pas encore programmé
+
 
 ### Ajouter un article
 

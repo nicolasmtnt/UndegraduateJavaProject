@@ -17,20 +17,44 @@ public class Items{
     public static void add(String type, String[] attributs){
         switch (type) {
             case "album":
-                map.put(UUID.randomUUID(), new Album(attributs[0], attributs[1], attributs[2], attributs[3]));
+                UUID uuid = UUID.randomUUID();
+                map.put(uuid, new Album(attributs[0], attributs[1], attributs[2], attributs[3]));
+
+                File file = new File("../ressources/database.txt");
+                BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
+                String message = uuid.toString() + "," + attributs[0] + attributs[1] + attributs[2] + attributs[3];
+                fo.write(message);
+                fo.close();
+
                 System.out.println("Produit ajouté !");
                 break;
-        
+
             case "videogame" :
-                map.put(UUID.randomUUID(), new VideoGame(attributs[0], attributs[1], attributs[2], attributs[3]));
+                UUID uuid = UUID.randomUUID();
+                map.put(uuid, new VideoGame(attributs[0], attributs[1], attributs[2], attributs[3]));
+
+                File file = new File("../ressources/database.txt");
+                BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
+                String message = uuid.toString() + "," + attributs[0] + attributs[1] + attributs[2] + attributs[3];
+                fo.write(message);
+                fo.close();
+
                 System.out.println("Produit ajouté !");
                 break;
 
             case "movie":
-                map.put(UUID.randomUUID(), new Movie(attributs[0], attributs[1], attributs[2], attributs[3]));
+                UUID uuid = UUID.randomUUID();
+                map.put(uuid, new Movie(attributs[0], attributs[1], attributs[2], attributs[3]));
+
+                File file = new File("../ressources/database.txt");
+                BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
+                String message = uuid.toString() + "," + attributs[0] + attributs[1] + attributs[2] + attributs[3];
+                fo.write(message);
+                fo.close();
+
                 System.out.println("Produit ajouté !");
                 break;
-        
+
             default:
                 System.out.println("Operation failed : The '"+type +"' type of item is not defined by the system");
                 break;
