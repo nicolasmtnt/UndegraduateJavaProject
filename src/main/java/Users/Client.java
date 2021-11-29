@@ -13,9 +13,9 @@ public class Client implements IUtilisateur{
     this.panier = new Panier;
 
     //On enregistre le nouveau client dans un fihchier nous servant de Base de données
-    String PseudoMdr = this.pseudoUnique + " " + this.passWord; //Dans un fichier on stock pseudo et mdp; ex : "Babar soleil31"
-    BufferedWriter writer = new BufferedWriter(new FileWriter("../../../src/main/ressources/Users.txt"));
-    writer.write(str);
+    String PseudoMdp = this.pseudoUnique + " " + this.passWord; //Dans un fichier on stock pseudo et mdp; ex : "Babar soleil31"
+    BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/ressources/Users.txt"));
+    writer.write(PseudoMdp);
     writer.close();
   }
 
@@ -56,5 +56,3 @@ public class Client implements IUtilisateur{
 
   }
 }
-
-
