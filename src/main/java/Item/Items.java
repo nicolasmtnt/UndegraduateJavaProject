@@ -22,7 +22,6 @@ public class Items{
 
                 File file = new File("../ressources/database.txt");
                 BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
-                System.out.println("Que voulez vous écrire ?");
                 String message = uuid.toString() + "," + attributs[0] + attributs[1] + attributs[2] + attributs[3];
                 fo.write(message);
                 fo.close();
@@ -36,7 +35,6 @@ public class Items{
 
                 File file = new File("../ressources/database.txt");
                 BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
-                System.out.println("Que voulez vous écrire ?");
                 String message = uuid.toString() + "," + attributs[0] + attributs[1] + attributs[2] + attributs[3];
                 fo.write(message);
                 fo.close();
@@ -50,7 +48,6 @@ public class Items{
 
                 File file = new File("../ressources/database.txt");
                 BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
-                System.out.println("Que voulez vous écrire ?");
                 String message = uuid.toString() + "," + attributs[0] + attributs[1] + attributs[2] + attributs[3];
                 fo.write(message);
                 fo.close();
