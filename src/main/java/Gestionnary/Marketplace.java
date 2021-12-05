@@ -1,8 +1,8 @@
 package Gestionnary;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-
 import Item.Items;
 
 
@@ -12,7 +12,7 @@ public class Marketplace{
     public static void display(){
         System.out.println("Liste des élements en ventes:");
         for (HashMap.Entry<String,Shelf> entry : map.entrySet()) {
-            System.out.println(entry.getKey() + " :");
+            System.out.println("\n    "+entry.getKey() + " :");
             entry.getValue().display();
 
         }
@@ -39,5 +39,28 @@ public class Marketplace{
         } else{
             System.out.println("Opération impossible : le nombre d'article en stock n'est pas suffisant");
         }
+    }
+
+    static public void substract(UUID uuid, int quantity){
+        int count = 0;
+        for(Shelf element: map.values()){
+            count = element.substract(uuid, quantity);
+            if(count>0){
+                System.out.println("Élement retiré de la vente avec succès");
+                break;
+            }
+        }
+        System.out.println("Aucun élement a été retiré");
+    }
+
+    public static ArrayList<UUID> search(String str){
+        ArrayList<UUID> foundItems = new ArrayList<>();
+        int count = 0;
+        for(Shelf element: map.values()){
+            ArrayList<UUID> foundUUID = element.search(str,count);
+            count+= foundItems.size();
+            foundItems.addAll(foundUUID);
+        }
+        return foundItems;
     }
 }

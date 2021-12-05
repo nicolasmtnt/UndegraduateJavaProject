@@ -1,6 +1,6 @@
 package Item;
 
-public class Movie extends Item{
+public final class Movie extends Item{
     String director;
     String studio;
 
@@ -12,7 +12,7 @@ public class Movie extends Item{
 
     @Override
     public String toString() {
-        return "Movie," + title +","+ year + "," + director + "," + studio;
+        return "Movie, " + title +", "+ year + ", " + director + ", " + studio;
     }
 
     

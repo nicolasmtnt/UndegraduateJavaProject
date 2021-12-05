@@ -74,6 +74,17 @@ public class Stock implements Scannable{
         }
     }
 
+    public static void substract(UUID uuid, int quantity){
+        try{
+            map.put(uuid, map.get(uuid)-quantity);
+            if (map.get(uuid)<1){
+                map.remove(uuid);
+            }
+        } catch (NullPointerException e){
+            System.out.println("Cette article n'est pas dans la liste");
+        }
+    }
+
     //   Méthodes de transfert
 
 
@@ -95,7 +106,7 @@ public class Stock implements Scannable{
         for(HashMap.Entry<UUID,Integer> element : map.entrySet()){
             if(Scannable.scan(Items.getValue(element.getKey()),str)){
                 foundItems.add(element.getKey());
-                System.out.println("["+foundItems.size()+"] "+Items.getValue(element.getKey()).toString()+ "quantité ("+element.getValue().toString()+")");
+                System.out.println("["+foundItems.size()+"] "+Items.getValue(element.getKey()).toString()+ ", quantité ("+element.getValue().toString()+")");
             }
         }
         return foundItems;

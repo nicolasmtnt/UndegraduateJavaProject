@@ -1,6 +1,6 @@
 package Item;
 
-public class Album extends Item {
+public final class Album extends Item {
     String label;
     String artist;
 
@@ -12,7 +12,7 @@ public class Album extends Item {
 
     @Override
     public String toString() {
-        return "Album," + title + "," + year + "," + artist + "," + label;
+        return "Album, " + title + ", " + year + ", " + artist + ", " + label;
     }
 
 }

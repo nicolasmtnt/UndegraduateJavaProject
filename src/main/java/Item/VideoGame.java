@@ -1,6 +1,6 @@
 package Item;
 
-public class VideoGame extends Item{
+public final class VideoGame extends Item{
     String publisher;
     String developer;
     int metascore;
@@ -13,7 +13,7 @@ public class VideoGame extends Item{
 
     @Override
     public String toString() {
-        return "VideoGame," + title + "," + year + "," + developer + "," + publisher;
+        return "VideoGame, " + title + ", " + year + ", " + developer + ", " + publisher;
     }
     
 

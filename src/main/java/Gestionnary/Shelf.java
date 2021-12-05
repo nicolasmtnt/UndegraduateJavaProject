@@ -1,7 +1,11 @@
 package Gestionnary;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.UUID;
 
+import Interface.Scannable;
+import Item.Item;
 import Item.Items;
 
 public class Shelf {
@@ -62,6 +66,21 @@ public class Shelf {
         }
     }
 
+    public int substract(UUID uuid, int quantity){
+        try{
+            map.put(uuid, new Number[]{(int)map.get(uuid)[0]-quantity, map.get(uuid)[1]});
+            if ((int)map.get(uuid)[0]<1){
+                map.remove(uuid);
+                return 1;
+            }
+        } catch (NullPointerException e){
+            return 0;
+        }
+        return 0;
+    }
+
+    
+
     //   Méthodes de transfert
 
     /**
@@ -82,4 +101,25 @@ public class Shelf {
             System.out.println("Cette article n'est pas den rayon");
         }
     }
+
+    public Set<UUID> keySet(){
+        return map.keySet();
+    }
+
+    public ArrayList<UUID> search(String str, int count){
+        ArrayList<UUID> foundItems = new ArrayList<>();
+        for(UUID uuid : this.map.keySet()){
+            Item item = Items.getValue(uuid);
+            if(Scannable.scan(item, str)){
+                foundItems.add(uuid);
+                System.out.println("["+sum(foundItems.size(),count) +"] "+item.toString()+ ", quantité("+ this.map.get(uuid)[0]+"), prix("+ this.map.get(uuid)[1]+")");
+            }
+        }
+        return foundItems;
+    }
+
+    private int sum(int a, int b){
+        return a+b;
+    }
+
 }
