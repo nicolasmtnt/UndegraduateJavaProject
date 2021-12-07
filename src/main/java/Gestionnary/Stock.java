@@ -36,7 +36,13 @@ public class Stock{
     }
 
     public static void add(UUID uuid, int quantity){
+        File file = new File("src/main/ressources/databaseStock.csv");
+        BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
         try{
+            message = uuid.toString() + "," + quantity+"\n";
+            fo.write(message);
+            fo.close();
+
             map.put(uuid, map.get(uuid)+quantity);
         } catch (NullPointerException e){
             map.put(uuid, quantity);
