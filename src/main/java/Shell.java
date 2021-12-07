@@ -136,7 +136,6 @@ public class Shell {
     static String userInput(String message) throws IOException{ // On utilise la surcharge
         System.out.println(message);
         return new BufferedReader(new InputStreamReader(System.in)).readLine();
-
     }
 
     static String userPublisherInput() throws IOException{

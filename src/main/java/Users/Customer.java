@@ -1,11 +1,16 @@
 package Users;
+
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
-public class Customer{
+import Interface.Searchable;
+
+public class Customer implements Searchable{
     
     private EncryptedPassword encryptedPassword;
     private String username;
+    private Cart cart = new Cart();
 
     public Customer(String username, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         this.encryptedPassword = new EncryptedPassword(password);
@@ -28,8 +33,11 @@ public class Customer{
         }
     }
 
-    public void searchProduct(){
-        //like seller
+    public void addToCart(UUID uuid,Integer quantity){
+        cart.addProduct(uuid, quantity);
     }
+
+
+    
 
 }
