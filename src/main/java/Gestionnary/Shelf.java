@@ -8,7 +8,7 @@ import Interface.Scannable;
 import Item.Item;
 import Item.Items;
 
-public class Shelf {
+public class Shelf implements Scannable{
     HashMap<UUID,Number[]> map;
     String category;
     
@@ -110,7 +110,7 @@ public class Shelf {
         ArrayList<UUID> foundItems = new ArrayList<>();
         for(UUID uuid : this.map.keySet()){
             Item item = Items.getValue(uuid);
-            if(Scannable.scan(item, str)){
+            if(scan(item, str)){
                 foundItems.add(uuid);
                 System.out.println("["+sum(foundItems.size(),count) +"] "+item.toString()+ ", quantité("+ this.map.get(uuid)[0]+"), prix("+ this.map.get(uuid)[1]+")");
             }

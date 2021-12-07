@@ -10,7 +10,7 @@ import java.util.UUID;
 
 import Interface.Scannable;
 
-public class Items implements Scannable{
+public class Items{
 
     public static HashMap<UUID,Item> map = new HashMap<>(); // La Map qui contient des item et leurs UUID comme clé
 
@@ -102,13 +102,14 @@ public class Items implements Scannable{
     public static ArrayList<UUID> search(String str){
         ArrayList<UUID> foundItems = new ArrayList<>();
         for(HashMap.Entry<UUID,Item> element : map.entrySet()){
-            if(Scannable.scan(element.getValue(),str)){
+            if(Scannable.staticScan(element.getValue(),str)){
                 foundItems.add(element.getKey());
                 System.out.println("["+foundItems.size()+"] "+element.getValue().toString());
             }
         }
         return foundItems;
     }
+
 
 
 

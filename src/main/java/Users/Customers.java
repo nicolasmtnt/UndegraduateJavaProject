@@ -1,7 +1,23 @@
 package Users;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-import java.util.UUID;
 
+public class Customers{
+    public static HashMap<String, Customer> map = new HashMap<>();
+
+    public static void addCustomer(String username, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+        map.put(username, new Customer(username, password));
+    }
+
+    // remove customer, être sur qu'il n'achète rien
+
+    public static void display(){
+        for (String username : map.keySet()) {
+            System.out.println(username);
+        }
+    }
+}
 // public class Client implements IUtilisateur{
 //   public String pseudoUnique;
 //   public String passWord;

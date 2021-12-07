@@ -7,7 +7,7 @@ import java.util.UUID;
 import Interface.Scannable;
 import Item.Items;
 
-public class Stock implements Scannable{
+public class Stock{
 
     static HashMap<UUID,Integer> map = new HashMap<>();
 
@@ -104,7 +104,7 @@ public class Stock implements Scannable{
     public static ArrayList<UUID> search(String str){
         ArrayList<UUID> foundItems = new ArrayList<>();
         for(HashMap.Entry<UUID,Integer> element : map.entrySet()){
-            if(Scannable.scan(Items.getValue(element.getKey()),str)){
+            if(Scannable.staticScan(Items.getValue(element.getKey()),str)){
                 foundItems.add(element.getKey());
                 System.out.println("["+foundItems.size()+"] "+Items.getValue(element.getKey()).toString()+ ", quantité ("+element.getValue().toString()+")");
             }
