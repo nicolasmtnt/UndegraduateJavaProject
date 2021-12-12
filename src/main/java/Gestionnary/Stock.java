@@ -1,5 +1,9 @@
 package Gestionnary;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -35,15 +39,19 @@ public class Stock{
 
     public static void add(UUID uuid, int quantity){
         File file = new File("src/main/ressources/databaseStock.csv");
-        BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
-        try{
-            message = uuid.toString() + "," + quantity+"\n";
-            fo.write(message);
-            fo.close();
+        try (BufferedWriter fo = new BufferedWriter(new FileWriter(file,true))) {
+            try{
+                String message = uuid.toString() + "," + quantity+"\n";
+                fo.write(message);
+                fo.close();
 
-            map.put(uuid, map.get(uuid)+quantity);
-        } catch (NullPointerException e){
-            map.put(uuid, quantity);
+                map.put(uuid, map.get(uuid)+quantity);
+            } catch (NullPointerException e){
+                map.put(uuid, quantity);
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
