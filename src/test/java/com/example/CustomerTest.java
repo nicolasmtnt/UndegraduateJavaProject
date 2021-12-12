@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import Users.Cart;
 import Users.Customer;
+import Users.Customers;
 
 public class CustomerTest {
 
@@ -23,6 +24,14 @@ public class CustomerTest {
     @Test
     void rechercheMagazin() throws NoSuchAlgorithmException, UnsupportedEncodingException{
         Customer cu = new Customer("Nicolas","azerty");
+        System.out.println(cu.getUsername());
+
+        Customers.add("Nicolas", "hello");
+        Customers.remove("Nicolas");
+        Customers.remove("Nicolas");
+
+
+        cu.displayCart();
 
     }
 }

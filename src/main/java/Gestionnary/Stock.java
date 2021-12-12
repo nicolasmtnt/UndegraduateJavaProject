@@ -20,11 +20,9 @@ public class Stock{
      */
     public static void add(String type, String title, String year, int quantity){
         UUID uuid = Items.getUUID(type, title, year);
-        try{
-            map.put(uuid, map.get(uuid)+quantity);
-        } catch (NullPointerException e){
-            map.put(uuid, quantity);
-        }
+        add(uuid, quantity);
+        System.out.println("Article ajouté");
+
     }
 
     public static Integer getValue(UUID uuid){
@@ -35,20 +33,19 @@ public class Stock{
         return map.put(uuid, x);
     }
 
-    public static void add(UUID uuid, int quantity){
+    public static void add(UUID uuid, Integer quantity){
         try{
             map.put(uuid, map.get(uuid)+quantity);
         } catch (NullPointerException e){
             map.put(uuid, quantity);
         }
-        System.out.println("Produit ajouté au stock");
     }
 
     /**
      * Affiche l'ensemble des articles en stock
      */
     public static void display(){
-        System.out.println("Liste des éléments en stock :");
+        System.out.println("\nListe des éléments en stock :");
         for(HashMap.Entry<UUID, Integer> entry : map.entrySet()){
             System.out.println(Items.getValue(entry.getKey()) + " , quantité : " + entry.getValue());
         }
@@ -62,24 +59,18 @@ public class Stock{
      * @param year
      * @param quantity
      */
-    public static void substract(String type, String title, String year, int quantity){
+    public static void remove(String type, String title, String year, int quantity){
         UUID uuid = Items.getUUID(type, title, year);
-        try{
-            map.put(uuid, map.get(uuid)-quantity);
-            if (map.get(uuid)<1){
-                map.remove(uuid);
-            }
-        } catch (NullPointerException e){
-            System.out.println("Cette article n'est pas dans la liste");
-        }
+        remove(uuid, quantity);
     }
-
-    public static void substract(UUID uuid, int quantity){
+    
+    public static void remove(UUID uuid, int quantity){
         try{
             map.put(uuid, map.get(uuid)-quantity);
             if (map.get(uuid)<1){
                 map.remove(uuid);
             }
+            System.out.println("Article retiré avec succès.");
         } catch (NullPointerException e){
             System.out.println("Cette article n'est pas dans la liste");
         }
@@ -92,10 +83,10 @@ public class Stock{
         UUID uuid = Items.getUUID(category, title, year);
         try {
             Marketplace.get(category).add(uuid, quantity, price);
-            substract(category, title, year, quantity);
+            remove(category, title, year, quantity);
         } catch (NullPointerException e) {
             Marketplace.put(category, new Shelf(category, uuid, quantity, price));
-            substract(category, title, year, quantity);
+            remove(category, title, year, quantity);
         }
     }
 

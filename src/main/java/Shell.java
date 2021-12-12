@@ -7,6 +7,7 @@ import Gestionnary.Marketplace;
 import Gestionnary.Stock;
 import Item.Items;
 
+@Deprecated
 public class Shell {
     public static void main(String[] args) throws IOException {
         Items.add("album", new String[]{"Dark Side of the Moon", "1988", "Pink Floyd", "Universal"});
@@ -42,7 +43,7 @@ public class Shell {
                     nextCommand();
                     break;
                 case "displaysell":
-                    Marketplace.display();
+                    Marketplace.displayManager();
                     nextCommand();
                     break;
                 case "addsell":
@@ -217,7 +218,7 @@ public class Shell {
             }
             UUID uuid = foundItems.get(Integer.parseInt(userInput("Entrez le [numéro] du produit : "))-1);
             int quantity = Integer.parseInt(userInput("Quelle quantité voulez vous enlever de la vente : "));
-            Marketplace.substract(uuid, quantity);
+            Marketplace.remove(uuid, quantity);
         } catch(NumberFormatException e){
             System.out.println("Erreur : La valeur entrée n'est pas valable");
         } catch(IndexOutOfBoundsException e){
@@ -235,7 +236,7 @@ public class Shell {
             }
             UUID uuid = foundItems.get(Integer.parseInt(userInput("Entrez le [numéro] du produit : "))-1);
             int quantity = Integer.parseInt(userInput("Entrez la quantité (entier): "));
-            Stock.substract(uuid, quantity);
+            Stock.remove(uuid, quantity);
         } catch (NumberFormatException e) {
                 System.out.println("Erreur : La valeur entrée n'est pas valable");
         } catch(IndexOutOfBoundsException e){

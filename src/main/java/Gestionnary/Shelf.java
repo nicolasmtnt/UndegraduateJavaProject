@@ -1,4 +1,5 @@
 package Gestionnary;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -40,9 +41,19 @@ public class Shelf implements Scannable{
     /**
      * Affiche l'ensemble des articles en ventes, leurs prix et la quantité en magazin
      */
-    public void display(){
+    public void displayManager(){
         for(HashMap.Entry<UUID, Number[]> entry : map.entrySet()){
             System.out.println(Items.getValue(entry.getKey()) + ", quantité : " + entry.getValue()[0] + " , prix : " + entry.getValue()[1]+"€");
+        }
+    }
+
+    public void displayClient(){
+        for(HashMap.Entry<UUID, Number[]> entry : map.entrySet()){
+            if(entry.getValue()[0].intValue() < 5){
+                System.out.println(Items.getValue(entry.getKey()) + " , prix : " + entry.getValue()[1]+"€"+" (presque épuisé)");
+            } else {
+                System.out.println(Items.getValue(entry.getKey()) + " , prix : " + entry.getValue()[1]+"€");
+            }
         }
     }
 
@@ -61,6 +72,7 @@ public class Shelf implements Scannable{
             if ((int)map.get(uuid)[0]<1){
                 map.remove(uuid);
             }
+            Stock.add(uuid, quantity);
         } catch (NullPointerException e){
             System.out.println("Cette article n'est pas dans la liste");
         }
@@ -71,6 +83,7 @@ public class Shelf implements Scannable{
             map.put(uuid, new Number[]{(int)map.get(uuid)[0]-quantity, map.get(uuid)[1]});
             if ((int)map.get(uuid)[0]<1){
                 map.remove(uuid);
+                Stock.add(uuid, quantity);
                 return 1;
             }
         } catch (NullPointerException e){
@@ -118,8 +131,30 @@ public class Shelf implements Scannable{
         return foundItems;
     }
 
+    public Double getPrice(UUID uuid){
+        for (HashMap.Entry<UUID,Number[]> entry : map.entrySet()){
+            if(entry.getKey().equals(uuid)){
+                return (Double)entry.getValue()[1];
+            }
+        }
+        return null;
+    }
+
+    public Integer getQuantity(UUID uuid){
+        for (HashMap.Entry<UUID,Number[]> entry : map.entrySet()){
+            if(entry.getKey().equals(uuid)){
+                return (Integer)entry.getValue()[0];
+            }
+        }
+        return null;
+    }
+
     private int sum(int a, int b){
         return a+b;
+    }
+
+    int size(){
+        return map.size();
     }
 
 }

@@ -9,11 +9,20 @@ import Item.Items;
 public class Marketplace{
     static HashMap<String,Shelf> map = new HashMap<>();
 
-    public static void display(){
+    public static void displayManager(){
         System.out.println("Liste des élements en ventes:");
         for (HashMap.Entry<String,Shelf> entry : map.entrySet()) {
             System.out.println("\n    "+entry.getKey() + " :");
-            entry.getValue().display();
+            entry.getValue().displayManager();
+
+        }
+    }
+
+    public static void displayClient(){
+        System.out.println("Liste des élements en ventes:");
+        for (HashMap.Entry<String,Shelf> entry : map.entrySet()) {
+            System.out.println("\n    "+entry.getKey() + " :");
+            entry.getValue().displayClient();
 
         }
     }
@@ -26,31 +35,55 @@ public class Marketplace{
         map.put(category, shelf);
     }
 
+    static public void add(String type, String title, String year, int quantity, double price){
+        UUID uuid = Items.getUUID(type, title, year);
+        add(uuid, quantity, price);
+    }
+
     static public void add(UUID uuid, int quantity, double price){
         if(quantity <= Stock.getValue(uuid)){
             String category = Items.getValue(uuid).getClassName();
             try {
                 map.get(category).add(uuid, quantity, price);
+                Stock.remove(uuid, quantity);
             } catch (NullPointerException e) {
                 map.put(category, new Shelf(category, uuid, quantity, price));
+                Stock.remove(uuid, quantity);
             }
-            Stock.changeValue(uuid, Stock.getValue(uuid)-quantity);
             System.out.println("Produit mis en vente avec succès");
         } else{
             System.out.println("Opération impossible : le nombre d'article en stock n'est pas suffisant");
         }
     }
 
-    static public void substract(UUID uuid, int quantity){
+    static public void remove(String type, String title, String year,int quantity){
+        UUID uuid = Items.getUUID(type, title, year);
+        Marketplace.remove(uuid, quantity);
+    }
+
+    static public void remove(UUID uuid, int quantity){
         int count = 0;
-        for(Shelf element: map.values()){
-            count = element.substract(uuid, quantity);
+        for(HashMap.Entry<String,Shelf> entry : map.entrySet()){
+            count = entry.getValue().substract(uuid, quantity);
+            if(entry.getValue().size()<1){
+                map.remove(entry.getKey());
+            }
             if(count>0){
                 System.out.println("Élement retiré de la vente avec succès");
                 break;
             }
         }
-        System.out.println("Aucun élement a été retiré");
+    }
+
+    static public void removeAfterBought(UUID uuid, int quantity){
+        for(HashMap.Entry<String,Shelf> entry : map.entrySet()){
+            entry.getValue().substract(uuid, quantity);
+        }
+        for(HashMap.Entry<String,Shelf> entry : map.entrySet()){
+            if(entry.getValue().size()<1){
+                map.remove(entry.getKey());
+            }
+        }
     }
 
     public static ArrayList<UUID> search(String str){
@@ -58,9 +91,31 @@ public class Marketplace{
         int count = 0;
         for(Shelf element: map.values()){
             ArrayList<UUID> foundUUID = element.search(str,count);
-            count+= foundItems.size();
             foundItems.addAll(foundUUID);
+            count+= foundItems.size();
         }
         return foundItems;
+    }
+
+    public static Double getPrice(UUID uuid){
+        for(Shelf element: map.values()){
+            Double price = element.getPrice(uuid);
+            if(price != null){
+                return price;
+            }
+        }
+        return 0.;
+
+    }
+
+    public static int getQuantity(UUID uuid){
+        for(Shelf element: map.values()){
+            Integer quantity = element.getQuantity(uuid);
+            if(quantity != null){
+                return quantity;
+            }
+        }
+        return 0;
+
     }
 }

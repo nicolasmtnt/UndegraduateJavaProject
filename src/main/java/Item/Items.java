@@ -20,43 +20,47 @@ public class Items{
      * @param attributs : Les attributs de l'item que l'on veut ajouter à map(le nombre varie en fonction de si item est un album, un film, un jeu-video ...)
      * @throws IOException
      */
-    public static void add(String type, String[] attributs) throws IOException{
+    public static void add(String type, String[] attributs){
         UUID uuid = UUID.randomUUID();
         File file = new File("src/main/ressources/database.csv");
-        BufferedWriter fo = new BufferedWriter(new FileWriter(file,true));
-        String message;
-        switch (type) {
-            case "album":
-                map.put(uuid, new Album(attributs[0], attributs[1], attributs[2], attributs[3]));
+        try (BufferedWriter fo = new BufferedWriter(new FileWriter(file,true))) {
+            String message;
+            switch (type) {
+                case "album":
+                    map.put(uuid, new Album(attributs[0], attributs[1], attributs[2], attributs[3]));
 
-                message = uuid.toString() + "," + attributs[0] + "," +  attributs[1] + "," + attributs[2] + "," + attributs[3]+"\n";
-                fo.write(message);
-                fo.close();
+                    message = uuid.toString() + "," + attributs[0] + "," +  attributs[1] + "," + attributs[2] + "," + attributs[3]+"\n";
+                    fo.write(message);
+                    fo.close();
 
-                System.out.println("Produit ajouté !");
-                break;
+                    System.out.println("Produit ajouté !");
+                    break;
 
-            case "videogame" :
-                map.put(uuid, new VideoGame(attributs[0], attributs[1], attributs[2], attributs[3]));
-                message = uuid.toString() + "," + attributs[0] + "," + attributs[1] + "," + attributs[2] + "," + attributs[3]+"\n";
-                fo.write(message);
-                fo.close();
+                case "videogame" :
+                    map.put(uuid, new VideoGame(attributs[0], attributs[1], attributs[2], attributs[3]));
+                    message = uuid.toString() + "," + attributs[0] + "," + attributs[1] + "," + attributs[2] + "," + attributs[3]+"\n";
+                    fo.write(message);
+                    fo.close();
 
-                System.out.println("Produit ajouté !");
-                break;
+                    System.out.println("Produit ajouté !");
+                    break;
 
-            case "movie":
-                map.put(uuid, new Movie(attributs[0], attributs[1], attributs[2], attributs[3]));
-                message = uuid.toString() + "," + attributs[0] + "," + attributs[1] + "," + attributs[2] + "," + attributs[3]+"\n";
-                fo.write(message);
-                fo.close();
+                case "movie":
+                    map.put(uuid, new Movie(attributs[0], attributs[1], attributs[2], attributs[3]));
+                    message = uuid.toString() + "," + attributs[0] + "," + attributs[1] + "," + attributs[2] + "," + attributs[3]+"\n";
+                    fo.write(message);
+                    fo.close();
 
-                System.out.println("Produit ajouté !");
-                break;
+                    System.out.println("Produit ajouté !");
+                    break;
 
-            default:
-                System.out.println("Operation failed : The '"+type +"' type of item is not defined by the system");
-                break;
+                default:
+                    System.out.println("Operation failed : The '"+type +"' type of item is not defined by the system");
+                    break;
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            System.out.println("An error occured");
         }
     }
 
@@ -97,6 +101,11 @@ public class Items{
      */
     public static Item getValue(UUID uuid){
         return map.get(uuid);
+    }
+
+    public static String getSimpleName(UUID uuid){
+        Item item = map.get(uuid);
+        return item.getTitle()+" ("+item.year+")";
     }
 
     public static ArrayList<UUID> search(String str){

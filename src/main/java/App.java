@@ -1,11 +1,19 @@
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import Gestionnary.*;
 import Item.Items;
+import Users.Customers;
+
+import Users.Manager;
+import Users.Staff;
 
 
 public class App{
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException, NumberFormatException, NoSuchAlgorithmException{
 
         System.out.println("\n ************ DEBUT DU PROGRAMME ************");
 
@@ -17,22 +25,71 @@ public class App{
         Items.display();
 
         Stock.add("movie", "Star Wars", "2010", 50);
+        Stock.add("videogame", "Super Mario bros", "2019", 12);
         
         Stock.display();
 
         Stock.toMarketplace("movie", "Star Wars", "2010", 20, 19.99);
-        Stock.toMarketplace("movie", "Star Wars", "2010", 2, 19.99);
+        Stock.toMarketplace("videogame", "Super Mario bros", "2019", 2, 19.99);
 
-        Marketplace.display();
         Stock.display();
+
+        //remettre map en private après... ainsi que le constructeur de manager
+        Staff.map.put("a", new Manager("a","b"));
+
+        execute();
+
         
-        System.out.println(" ************ FIN DU PROGRAMME ************\n");
-
-        System.out.println(Items.getValue(Items.getUUID("movie", "Star Wars","2010")).toString());
-        Marketplace.search("star");
-
         
     }
+
+    static void execute() throws IOException, NoSuchAlgorithmException, NumberFormatException{
+        System.out.println(" *********** LANCEMENT DU PROGRAMME *********** \n");
+        Boolean running = true;
+        String in;
+        while(running){
+            newCommand();
+            in = userInput();
+            switch (in) {
+                case "new":
+                    Customers.newCustomer(); 
+                    break;
+                case "connect": 
+                    Customers.connect();
+                    break;
+                case "admin": 
+                    Staff.interact();
+                    break;
+                case "exit": 
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Commande non trouvée");
+                    break;
+            }
+        }
+        System.out.println(" ************ FIN DU PROGRAMME ************\n");
+
+    }
+    
+    static void newCommand(){
+        System.out.println("\nnew : Créer un compte client\n"+
+        "connect : se connecter en tant que client\n"+
+        "admin : se connecter en tant que gérant du magazin\n"+
+        "exit : Sauvegarder et quitter\n"+
+        "Nouvelle commande :\n");
+    };
+
+    static String userInput() throws IOException{
+        return new BufferedReader(new InputStreamReader(System.in)).readLine();
+    }
+
+    static String userInput(String message) throws IOException{
+        System.out.println(message);
+        return new BufferedReader(new InputStreamReader(System.in)).readLine();
+    }
+
+    
 }
 
 
