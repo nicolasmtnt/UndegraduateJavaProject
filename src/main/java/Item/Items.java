@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.Scanner;
 
 import Interface.Scannable;
 
@@ -118,6 +119,25 @@ public class Items{
         }
         return foundItems;
     }
+
+    /**
+     * Transform le contenu du fichier database en liste afin de pouvoir y traiter les doublons. Pour l'instant, ne retourne rien
+     et print la liste pour tester, mais à terme la methode devra retouner la liste afin de la transmettre à une methode de check doublons
+     */
+    public void transformList() throws IOException {
+    try {
+      Scanner s = new Scanner(new File("src/main/ressources/database.csv"));
+      ArrayList<String> list = new ArrayList<String>();
+      while (s.hasNext()){
+        list.add(s.next());
+      }
+      s.close();
+
+      System.out.println(list);
+    } catch (IOException e) {
+      System.out.println("Lecture du fichier impossible");
+    }
+  }
 
 
 
