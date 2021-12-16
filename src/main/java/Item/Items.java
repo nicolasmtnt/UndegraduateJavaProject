@@ -23,7 +23,14 @@ public class Items{
      */
     public static void add(String type, String[] attributs){
         UUID uuid = UUID.randomUUID();
-        File file = new File("src/main/ressources/database.csv");
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        System.getProperty("ressources.dir");
+        URL url = classLoader.getResourceAsStream("/us_postal_codes.csv");
+        String fileName = url.getFile();
+        File file = new File(fileName);
+
+        // File file = new File("src/main/ressources/database.csv");
         try (BufferedWriter fo = new BufferedWriter(new FileWriter(file,true))) {
             String message;
             switch (type) {
