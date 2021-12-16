@@ -12,13 +12,13 @@ import Users.EncryptedPassword;
 public class EncryptedPasswordTest {
     @Test
     void test() throws NoSuchAlgorithmException, UnsupportedEncodingException{
-        EncryptedPassword encryptedPassword = new EncryptedPassword("hello");
+        EncryptedPassword encryptedPassword = new EncryptedPassword("hello",true);
         assertEquals("aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d", encryptedPassword.getEncryptedPassword());
     }
 
     @Test
     void testVerify() throws NoSuchAlgorithmException, UnsupportedEncodingException{
-        EncryptedPassword encryptedPassword = new EncryptedPassword("hello");
+        EncryptedPassword encryptedPassword = new EncryptedPassword("hello",true);
         assertEquals(true, encryptedPassword.verify("hello"));
     }
 

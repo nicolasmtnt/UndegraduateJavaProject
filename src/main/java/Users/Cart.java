@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import Gestionnary.Marketplace;
-import Item.Item;
 import Item.Items;
 
-
+/**
+ * Gère le pannier d'un consommateur
+ */
 public class Cart{
     
     private HashMap<UUID,Integer> shoppingList = new HashMap<>();
@@ -34,13 +35,15 @@ public class Cart{
 
     public void changeQuantity(UUID uuid, Integer quantity){
         if(quantity<1){
-            shoppingList.remove(uuid);
+            shoppingList.remove(uuid); // Si la quantité d'un produit devientt nul dans le panier, alors l'entrée de ce produit est supprimé de la ArrayList
         }else{
             shoppingList.put(uuid, quantity);
         }
     }
 
-
+    /**
+     * Utilisé pour l'intéractin avec le consommateur
+     */
     public void display(){
         System.out.println("Articles dans le panier : ");
         int i = 0;
@@ -61,6 +64,9 @@ public class Cart{
         reset();
     }
 
+    /**
+     * @return Prix de l'ensemble du panier du consommateur avant l'achat
+     */
     public Double totalPrice(){
         Double price = 0.;
         for (HashMap.Entry<UUID,Integer> item : shoppingList.entrySet()) {

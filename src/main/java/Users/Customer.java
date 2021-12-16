@@ -6,17 +6,21 @@ import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 import Gestionnary.Marketplace;
-import Interface.Searchable;
 import Item.Items;
 
-public class Customer extends User implements Searchable{
+public class Customer extends User{
 
     private Cart cart = new Cart();
 
-    public Customer(String username, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        super(username, password);
+    public Customer(String username, String password, Boolean encrypt) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        super(username, password, encrypt);
     }
 
+    /**
+     * @param uuid de l'article que l'on veut ajouter dans le panier
+     * @throws NumberFormatException
+     * @throws IOException
+     */
     public void addToCart(UUID uuid) throws NumberFormatException, IOException{
         int quantity = inputQuantity();
         if(quantity <= Marketplace.getQuantity(uuid)){
@@ -35,6 +39,12 @@ public class Customer extends User implements Searchable{
         System.out.println("Achat effectué");
     }
 
+    /**
+     * Demande à l'utilisateur d'effectuer une recherche dans le panier avec searchMarketplace()
+     * Ici un article est trouvé alors askCustomerUpponItem(UUID uuid)
+     * @throws NumberFormatException
+     * @throws IOException
+     */
     public void search() throws NumberFormatException, IOException{
         UUID uuid = searchMarketplace();
         if (uuid != null) {
@@ -42,6 +52,12 @@ public class Customer extends User implements Searchable{
         }
     }
 
+    /**
+     * Demande à l'utilisateur si il veut acheter l'article qu'il a selectionner
+     * @param uuid
+     * @throws NumberFormatException
+     * @throws IOException
+     */
     public void askCustomerUpponItem(UUID uuid) throws NumberFormatException, IOException{
         System.out.println("***"+ Items.getSimpleName(uuid) +"***\n"+
         "buy : Ajouter au panier\n"+
@@ -58,6 +74,10 @@ public class Customer extends User implements Searchable{
     
     }
 
+    /**
+     * Lance le processus de paiement en affichant à l'utilisateur le prix total et en lui demandant confirmation d'achat
+     * @throws IOException
+     */
     public void buyCart() throws IOException{
         displayCart();
         System.out.println("Prix total : "+ cart.totalPrice()+"€\n");
@@ -122,10 +142,7 @@ public class Customer extends User implements Searchable{
         +" * display : Afficher les articles en vente\n"
         +" * changePassword : Changer votre mot de passe \n"
         +" * help : Afficher la liste des commandes disponibles\n"
-        +" * exit : Quitter le programme \n"
+        +" * exit : Deconnexion (Les commandes non finalisées sont supprimées) \n"
         );
     }
-
-
-
 }

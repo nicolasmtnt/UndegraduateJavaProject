@@ -7,44 +7,45 @@ import java.io.InputStreamReader;
 import Gestionnary.*;
 import Item.Items;
 import Users.Customers;
-
-import Users.Manager;
 import Users.Staff;
 
 
 public class App{
     public static void main(String[] args) throws IOException, NumberFormatException, NoSuchAlgorithmException{
-
-        System.out.println("\n ************ DEBUT DU PROGRAMME ************");
-
         // Création d'élements : 
-        Items.add("album", new String[]{"Dark Side of the Moon", "1988", "Pink Floyd", "Universal"});
-        Items.add("videogame", new String[]{"Super Mario bros","2019","Nintendo","Nintendo"});
-        Items.add("movie", new String[]{"Star Wars","2010","George Lucas","Lucasfilm"});
-        Items.add("movie", new String[]{"Star Wars","2010","George Lucas","Lucasfilm"}); // ajouter truc pour empecher doublon
-        Items.display();
+        // Items.add("album", new String[]{"Dark Side of the Moon", "1988", "Pink Floyd", "Universal"});
+        // Items.add("videogame", new String[]{"Super Mario bros","2019","Nintendo","Nintendo"});
+        // Items.add("movie", new String[]{"Star Wars","2010","George Lucas","Lucasfilm"});
+        // Items.add("movie", new String[]{"Star Wars","2010","George Lucas","Lucasfilm"}); // ajouter truc pour empecher doublon
+        // Items.display();
 
-        Stock.add("movie", "Star Wars", "2010", 50);
-        Stock.add("videogame", "Super Mario bros", "2019", 12);
+        // Stock.add("movie", "Star Wars", "2010", 50);
+        // Stock.add("videogame", "Super Mario bros", "2019", 12);
         
-        Stock.display();
+        // Stock.display();
 
-        Stock.toMarketplace("movie", "Star Wars", "2010", 20, 19.99);
-        Stock.toMarketplace("videogame", "Super Mario bros", "2019", 2, 19.99);
+        // Stock.toMarketplace("movie", "Star Wars", "2010", 20, 19.99);
+        // Stock.toMarketplace("videogame", "Super Mario bros", "2019", 2, 19.99);
 
-        Stock.display();
+        // Stock.display();
 
         //remettre map en private après... ainsi que le constructeur de manager
-        Staff.map.put("a", new Manager("a","b"));
 
         execute();
-
-        
         
     }
 
     static void execute() throws IOException, NoSuchAlgorithmException, NumberFormatException{
-        System.out.println(" *********** LANCEMENT DU PROGRAMME *********** \n");
+        System.out.println(" *********** LANCEMENT DU PROGRAMME ***********\n");
+        
+        System.out.println("Chargement de la sauvergarde ...\n\n");
+        Staff.readSave();
+        Customers.readSave();
+        Items.readSave();
+        Stock.readSave();
+        Marketplace.readSave();
+        
+        System.out.println("Entrez 'help' pour afficher les commandes.");
         Boolean running = true;
         String in;
         while(running){
@@ -62,22 +63,28 @@ public class App{
                     break;
                 case "exit": 
                     running = false;
+                    System.out.println("Sauvergarde ...");;
                     break;
                 default:
                     System.out.println("Commande non trouvée");
                     break;
             }
         }
-        System.out.println(" ************ FIN DU PROGRAMME ************\n");
+        Staff.writeSave();
+        Customers.writeSave();
+        Items.writeSave();
+        Stock.writeSave();
+        Marketplace.writeSave();
 
+        System.out.println(" ************ FIN DU PROGRAMME ************\n");
     }
     
     static void newCommand(){
-        System.out.println("\nnew : Créer un compte client\n"+
+        System.out.print("\nnew : Créer un compte client\n"+
         "connect : se connecter en tant que client\n"+
         "admin : se connecter en tant que gérant du magazin\n"+
-        "exit : Sauvegarder et quitter\n"+
-        "Nouvelle commande :\n");
+        "exit : Sauvegarder et quitter\n\n"+
+        "Nouvelle commande : ");
     };
 
     static String userInput() throws IOException{

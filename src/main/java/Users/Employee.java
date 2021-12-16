@@ -11,8 +11,8 @@ import Interface.AdminSearchable;
 import Item.Items;
 
 public class Employee extends User implements AdminSearchable{
-    public Employee(String username, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        super(username, password);
+    public Employee(String username, String password, Boolean encrypt) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        super(username, password, encrypt);
     }
     // private void removeCustomer(String username) throws NoSuchAlgorithmException, UnsupportedEncodingException{
     //     Customers.remove(username);
@@ -25,6 +25,7 @@ public class Employee extends User implements AdminSearchable{
             Stock.add(uuid, quantity);
         }
     }
+
 
     protected void removeStock() throws NumberFormatException, IOException{
         UUID uuid = searchStock();
@@ -54,7 +55,7 @@ public class Employee extends User implements AdminSearchable{
     public void interact(String password) throws NumberFormatException, IOException, NoSuchAlgorithmException{
         if(encryptedPassword.verify(password)){
             Boolean running = true;
-            System.out.println(" *********** BIENVENUE : "+this.username+" (compte employé) *********** \n\n"+
+            System.out.println(" *********** BIENVENUE : "+this.username+" (compte Employé) *********** \n\n"+
                 "Entrez 'help' pour afficher les commandes.");
             nextCommand();
             while(running){
@@ -108,7 +109,7 @@ public class Employee extends User implements AdminSearchable{
                         break;
                     }
                 }
-            System.out.println("*********** DECONNEXION DE "+this.username+"  *********** ");
+            System.out.println("*********** DECONNEXION DE "+this.username+" (compte Employé) *********** ");
         } else{
             System.out.println("Mot de passe incorrect");
         }
@@ -160,7 +161,7 @@ public class Employee extends User implements AdminSearchable{
         +" * removesell : Retirer un produit de la vente \n"
         +" * changePassword : Changer votre mot de passe \n"
         +" * help : Afficher la liste des commandes disponibles\n"
-        +" * exit : Quitter le programme \n"
+        +" * exit : Deconnexion \n"
         );
     }
 

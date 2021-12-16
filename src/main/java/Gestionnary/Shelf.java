@@ -1,5 +1,7 @@
 package Gestionnary;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -119,6 +121,12 @@ public class Shelf implements Scannable{
         return map.keySet();
     }
 
+    /**
+     * Méthode utilisé par la méthode search() de Marketplace et donc par l'interface Searchable
+     * @param str
+     * @param count
+     * @return
+     */
     public ArrayList<UUID> search(String str, int count){
         ArrayList<UUID> foundItems = new ArrayList<>();
         for(UUID uuid : this.map.keySet()){
@@ -157,4 +165,19 @@ public class Shelf implements Scannable{
         return map.size();
     }
 
+    /**
+     * Méthode utilisé par la méthode writeSave() de Marketplace
+     * @param bufferedWriter
+     */
+    public void writeSave(BufferedWriter bufferedWriter){
+        try {
+            for(HashMap.Entry<UUID,Number[]> entry : this.map.entrySet()){
+                bufferedWriter.write(entry.getKey().toString()+","+entry.getValue()[0].toString()+","+entry.getValue()[1].toString());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
 }

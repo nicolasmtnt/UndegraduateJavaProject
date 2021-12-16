@@ -3,15 +3,24 @@ package Users;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Cette classe statique permet de stocker le compte des utilisateurs
+ */
 public class Customers{
     private static HashMap<String, Customer> map = new HashMap<>();
+    public static String filePath = "src/main/ressources/customer.txt";
 
     public static void add(String username, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException{
-        map.put(username, new Customer(username, password));
+        map.put(username, new Customer(username, password, true));
         System.out.println("Compte crée");
     }
 
@@ -20,8 +29,6 @@ public class Customers{
             System.out.println("Erreur : aucun client porte se nom.");
         }
     }
-
-    // remove customer, être sur qu'il n'achète rien
 
     public static void display(){
         for (String username : map.keySet()) {
@@ -33,7 +40,7 @@ public class Customers{
         String username = userInput("Choisissez un nom d'utilisateur");
         if(map.containsKey(username)){
             System.out.println("Nom d'utilisateur déjà pris");
-            newCustomer();
+            return;
         }
         String password = userInput("Choisissez un mot de passe");
         add(username, password);
@@ -53,58 +60,40 @@ public class Customers{
         return new BufferedReader(new InputStreamReader(System.in)).readLine();
     }
 
+    /**
+    * Enregistre les venderus dans un fichier .txt
+    */
+    public static void writeSave(){
+
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
+            for(HashMap.Entry<String,Customer> entry : map.entrySet()){
+                bufferedWriter.write(entry.getValue().toString());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    /**
+    * Récupère les articles enregistré dans un .text durant la dernière session
+    */
+    public static void readSave(){
+        Scanner scanner;
+        try{
+            scanner = new Scanner(new FileInputStream(filePath));
+            while(scanner.hasNext()){
+                String[] str = scanner.nextLine().split(",");
+                map.put(str[0], new Customer(str[0],str[1],false));
+            }
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println(e);
+        } catch (UnsupportedEncodingException e) {
+            System.out.println(e);
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+    }
 }
-// public class Client implements IUtilisateur{
-//   public String pseudoUnique;
-//   public String passWord;
-//   public Panier panier;
-
-//   public Client(String pseudoUnique, String passWord){
-//     this.pseudoUnique = pseudoUnique;
-//     this.passWord = passWord;
-//     this.panier = new Panier;
-
-//     //On enregistre le nouveau client dans un fihchier nous servant de Base de données
-//     String PseudoMdp = this.pseudoUnique + " " + this.passWord; //Dans un fichier on stock pseudo et mdp; ex : "Babar soleil31"
-//     BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/ressources/Users.txt"));
-//     writer.write(PseudoMdp);
-//     writer.close();
-//   }
-
-//   public HashMap<UUID,Integer> getPanier(){
-//     return this.panier.getPanier();
-//   }
-
-//   public String toString(){
-//     return "(CLIENT)  Pseudo : " + this.pseudoUnique + "mdp : " + this.passWord;
-//   }
-
-
-//   public ArrayList<Magasin>() voirListeMagasin(){
-
-//   }
-
-//   public void choisirMagasin(){
-
-//   }
-
-//   public ArrayList<Rayon>() voirListeRayon(){
-
-//   }
-
-//   public void choisirRayon(){
-
-//   }
-
-//   public ArrayList<Produit>() voirListeProduit(){
-
-//   }
-
-//   public void choisirProduit(){
-
-//   }
-
-//   public void acheterProduit(){
-
-//   }
-// }

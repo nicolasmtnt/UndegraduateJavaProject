@@ -13,11 +13,8 @@ public abstract class Item {
     public String toString() {
         return "Item [title=" + title + ", year=" + year + "]";
     }
-    
-
 
     /* ---------- Getter / Setter ---------- */
-
 
     public String getClassName() {
         return this.getClass().getSimpleName();

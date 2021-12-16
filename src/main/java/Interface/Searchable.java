@@ -5,6 +5,13 @@ import java.util.UUID;
 import Gestionnary.Marketplace;
 
 
+/**
+ * Methode utilisé pour que l'utilisateur selectionne un article en vente:
+ *  1. L'utilisateur entre une chaine de caractère (recerche)
+ *  2. L'utilisateur entre un nombre entre 1 et n pour choisir un article parmi les n articles trouvés
+ *  @return l'UUID de l'article seléctionné
+ */
+
 public interface Searchable extends Interactable{
     default UUID searchMarketplace(){
         try{
@@ -26,6 +33,9 @@ public interface Searchable extends Interactable{
     }
 }
 
+/**
+ * Création de l'exception dans le cas ou aucun article a été trouvé durant la recherche
+ */
 class UnsatisfableSearchResultException extends Exception{
     public UnsatisfableSearchResultException(){
         super("Aucun élement trouvé");

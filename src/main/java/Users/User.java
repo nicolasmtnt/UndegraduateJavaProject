@@ -11,8 +11,25 @@ public abstract class User implements Searchable{
     protected String username;
     protected EncryptedPassword encryptedPassword;
 
-    public User(String username, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        this.encryptedPassword = new EncryptedPassword(password);
+
+    @Override
+    public String toString() {
+        return this.username+","+this.encryptedPassword.getEncryptedPassword();
+    }
+
+
+    public User(String username, String password, Boolean encrypt) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        if(encrypt){
+            this.encryptedPassword = new EncryptedPassword(password, true);
+            this.username = username;
+        } else {
+            this.encryptedPassword = new EncryptedPassword(password, false);
+            this.username = username;
+        }
+    }
+
+    public User(String username, String password, int x) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        this.encryptedPassword = new EncryptedPassword(password, true);
         this.username = username;
     }
 
@@ -21,11 +38,11 @@ public abstract class User implements Searchable{
     }
 
     public void changePassword(String newpassword) throws NoSuchAlgorithmException, UnsupportedEncodingException{
-        this.encryptedPassword = new EncryptedPassword(newpassword);
+        this.encryptedPassword = new EncryptedPassword(newpassword, true);
     }
 
     static void nextCommand(){
-        System.out.println("\nNouvelle commande :");
+        System.out.print("\nNouvelle commande : ");
     }
 
     public abstract void interact(String password) throws NumberFormatException, IOException, NoSuchAlgorithmException;

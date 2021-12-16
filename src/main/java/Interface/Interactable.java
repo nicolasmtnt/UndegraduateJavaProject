@@ -11,7 +11,7 @@ public interface Interactable {
     }
 
     default String userInput(String message) throws IOException{ // On utilise la surcharge
-        System.out.println(message);
+        System.out.print(message);
         return new BufferedReader(new InputStreamReader(System.in)).readLine();
     }
 

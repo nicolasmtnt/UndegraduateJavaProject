@@ -2,10 +2,13 @@ package Gestionnary;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.UUID;
 
 import Interface.Scannable;
@@ -14,6 +17,8 @@ import Item.Items;
 public class Stock{
 
     static HashMap<UUID,Integer> map = new HashMap<>();
+    public static String filePath = "src/main/ressources/Stock.txt";
+
 
     /**
      * Ajoute un article au stock
@@ -38,7 +43,7 @@ public class Stock{
     }
 
     public static void add(UUID uuid, int quantity){
-        File file = new File("src/main/ressources/databaseStock.csv");
+        File file = new File("src/main/ressources/historyStock.csv");
         try (BufferedWriter fo = new BufferedWriter(new FileWriter(file,true))) {
             try{
                 String message = uuid.toString() + "," + quantity+"\n";
@@ -50,7 +55,6 @@ public class Stock{
                 map.put(uuid, quantity);
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -115,6 +119,38 @@ public class Stock{
             }
         }
         return foundItems;
+    }
+
+    /**
+    * Enregistre les venderus dans un fichier .txt
+    */
+    public static void writeSave(){
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
+            for(HashMap.Entry<UUID,Integer> entry : map.entrySet()){
+                bufferedWriter.write(entry.getKey().toString()+","+entry.getValue().toString());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+            } catch (IOException e) {
+            System.out.println(e);
+            }
+        }
+
+    /**
+    * Récupère les articles enregistré dans un .text durant la dernière session
+    */
+    public static void readSave(){
+        Scanner scanner;
+        try{
+            scanner = new Scanner(new FileInputStream(filePath));
+            while(scanner.hasNext()){
+                String[] str = scanner.nextLine().split(",");
+                map.put(UUID.fromString(str[0]), Integer.parseInt(str[1]));
+            } 
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
     }
 
 }

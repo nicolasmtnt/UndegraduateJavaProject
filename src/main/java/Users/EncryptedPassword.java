@@ -9,11 +9,15 @@ public class EncryptedPassword {
 
     private String encryptedPassword;
     
-    public EncryptedPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        MessageDigest crypt = MessageDigest.getInstance("SHA-1");
-        crypt.reset();
-        crypt.update(password.getBytes("UTF-8"));
-        this.encryptedPassword = new BigInteger(1, crypt.digest()).toString(16);
+    public EncryptedPassword(String password, Boolean encrypt) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        if(encrypt){
+            MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+            crypt.reset();
+            crypt.update(password.getBytes("UTF-8"));
+            this.encryptedPassword = new BigInteger(1, crypt.digest()).toString(16);
+        } else {
+            this.encryptedPassword = password;
+        }
     }
 
     public String getEncryptedPassword(){

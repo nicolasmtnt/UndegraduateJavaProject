@@ -37,7 +37,7 @@ class ItemsTest {
         Items.display();
 
         assertEquals(m.toString(), Items.getValue(Items.getUUID("movie", "Star Wars", "1977")).toString());
-        assertEquals("Album, Dark Side of the Moon, 1988, Pink Floyd, Universal", Items.getValue(Items.getUUID("album", "Dark Side of the Moon", "1988")).toString());
+        assertEquals("Album,Dark Side of the Moon,1988,Pink Floyd,Universal", Items.getValue(Items.getUUID("album", "Dark Side of the Moon", "1988")).toString());
 
         Items.map.remove(Items.getUUID("album", "Dark Side of the Moon", "1988"));
         assertEquals(2, Items.map.size());

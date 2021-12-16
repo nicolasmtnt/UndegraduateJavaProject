@@ -59,7 +59,8 @@ public class Shell {
                     break;
                 case "exit":
                     running = false;
-                    System.out.println("*********** ARRET DU PROGRAMME *********** ");
+                    System.out.println("Sauvergarde ...");
+                    System.out.println("*********** FIN DU PROGRAMME *********** ");
                     break;
                 default:
                     System.out.println("Commande non trouvée");

@@ -12,7 +12,7 @@ public final class Movie extends Item{
 
     @Override
     public String toString() {
-        return "Movie, " + title +", "+ year + ", " + director + ", " + studio;
+        return "Movie," + title +","+ year + "," + director + "," + studio;
     }
 
     

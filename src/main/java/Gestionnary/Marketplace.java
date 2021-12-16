@@ -1,14 +1,22 @@
 package Gestionnary;
 
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.UUID;
 import Item.Items;
 
 
 public class Marketplace{
     static HashMap<String,Shelf> map = new HashMap<>();
+    public static String filePath = "src/main/ressources/Marketplace.txt";
 
+    // display adapté au gérant
     public static void displayManager(){
         System.out.println("Liste des élements en ventes:");
         for (HashMap.Entry<String,Shelf> entry : map.entrySet()) {
@@ -18,6 +26,7 @@ public class Marketplace{
         }
     }
 
+    // display adapté au client (ne donne pas le nombre d'article en stock ("presque épuisé" si il n'y en reste plus beaucoup)
     public static void displayClient(){
         System.out.println("Liste des élements en ventes:");
         for (HashMap.Entry<String,Shelf> entry : map.entrySet()) {
@@ -35,11 +44,13 @@ public class Marketplace{
         map.put(category, shelf);
     }
 
-    static public void add(String type, String title, String year, int quantity, double price){
-        UUID uuid = Items.getUUID(type, title, year);
-        add(uuid, quantity, price);
-    }
-
+    /**
+     * Permet au vendeur de transférér un article de l'état de "en stock" à l'état "en vete"
+     * Stock -> Marketplace (Shelf)
+     * @param uuid
+     * @param quantity
+     * @param price
+     */
     static public void add(UUID uuid, int quantity, double price){
         if(quantity <= Stock.getValue(uuid)){
             String category = Items.getValue(uuid).getClassName();
@@ -56,11 +67,12 @@ public class Marketplace{
         }
     }
 
-    static public void remove(String type, String title, String year,int quantity){
-        UUID uuid = Items.getUUID(type, title, year);
-        Marketplace.remove(uuid, quantity);
-    }
-
+    /**
+     * Retire quantity élement de la vente
+     * Si il n'y en a plus aucun, alors l'entrée dans le Shelf associé est supprimé
+     * @param uuid
+     * @param quantity
+     */
     static public void remove(UUID uuid, int quantity){
         int count = 0;
         for(HashMap.Entry<String,Shelf> entry : map.entrySet()){
@@ -75,6 +87,11 @@ public class Marketplace{
         }
     }
 
+    /**
+     * Comme remove(UUID uuid, int quantity) mais ici adapté à l'intérface client
+     * @param uuid
+     * @param quantity
+     */
     static public void removeAfterBought(UUID uuid, int quantity){
         for(HashMap.Entry<String,Shelf> entry : map.entrySet()){
             entry.getValue().substract(uuid, quantity);
@@ -86,6 +103,11 @@ public class Marketplace{
         }
     }
 
+    /**
+     * Méthode utilisé par l'Interface Searchable pour effectuer une recherche
+     * @param str
+     * @return
+     */
     public static ArrayList<UUID> search(String str){
         ArrayList<UUID> foundItems = new ArrayList<>();
         int count = 0;
@@ -116,6 +138,38 @@ public class Marketplace{
             }
         }
         return 0;
-
     }
+
+    /**
+    * Enregistre les articles en vente dans un fichier .txt
+    */
+    public static void writeSave(){
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
+            for(HashMap.Entry<String,Shelf> entry : map.entrySet()){
+                entry.getValue().writeSave(bufferedWriter);
+            }
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
+    /**
+    * Récupère les articles en vente dans un .text durant la dernière session
+    */
+    public static void readSave(){
+        Scanner scanner;
+        try{
+            scanner = new Scanner(new FileInputStream(filePath));
+            while(scanner.hasNext()){
+                String[] str = scanner.nextLine().split(",");
+                add(UUID.fromString(str[0]), Integer.parseInt(str[1]), Double.parseDouble(str[2]));
+            } 
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
+
 }

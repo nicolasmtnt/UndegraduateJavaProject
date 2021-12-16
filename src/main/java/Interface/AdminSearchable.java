@@ -7,6 +7,11 @@ import Gestionnary.Stock;
 import Item.Items;
 
 public interface AdminSearchable extends Searchable{
+
+    /**
+     * Pareil que searchMarketplace() de Searchable sauf que la recherche s'effectue parmi les stocks (résérvé aux Employées)
+     * @return uuid
+     */
     default UUID searchStock(){
         try{
             ArrayList<UUID> foundItems = Stock.search(userInput("Recherchez un produit (nom, auteurs ...) : "));
@@ -26,6 +31,10 @@ public interface AdminSearchable extends Searchable{
         }
     }
 
+    /**
+     * Pareil que searchMarketplace() de Searchable sauf que la recherche s'effectue parmi les Items enregistrés (résérvé aux Employées)
+     * @return uuid
+     */
     default UUID searchItem(){
         try{
             ArrayList<UUID> foundItems = Items.search(userInput("Recherchez un produit (nom, auteurs ...) : "));

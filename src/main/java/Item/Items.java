@@ -2,6 +2,8 @@ package Item;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,23 +16,11 @@ import Interface.Scannable;
 public class Items{
 
     public static HashMap<UUID,Item> map = new HashMap<>(); // La Map qui contient des item et leurs UUID comme clé
+    public static String filePath = "src/main/ressources/Items.txt";
 
-    /**
-     * Ajoute un produit en ajoutant à map une valeur de clé UUID (généré automatiquement) et un objet item
-     * @param type : Prend une valeur parmit : movie, videogame, album
-     * @param attributs : Les attributs de l'item que l'on veut ajouter à map(le nombre varie en fonction de si item est un album, un film, un jeu-video ...)
-     * @throws IOException
-     */
     public static void add(String type, String[] attributs){
         UUID uuid = UUID.randomUUID();
-
-        ClassLoader classLoader = getClass().getClassLoader();
-        System.getProperty("ressources.dir");
-        URL url = classLoader.getResourceAsStream("/us_postal_codes.csv");
-        String fileName = url.getFile();
-        File file = new File(fileName);
-
-        // File file = new File("src/main/ressources/database.csv");
+        File file = new File("src/main/ressources/history.csv");
         try (BufferedWriter fo = new BufferedWriter(new FileWriter(file,true))) {
             String message;
             switch (type) {
@@ -67,7 +57,6 @@ public class Items{
                     break;
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             System.out.println("An error occured");
         }
     }
@@ -116,6 +105,11 @@ public class Items{
         return item.getTitle()+" ("+item.year+")";
     }
 
+    /**
+     * Utilisé pour afficher à l'utilisateur la liste des articles correspondant à sa recherche
+     * @param str
+     * @return ArrayList (indexé de 1 à n) des n articles correspondants au Regex de str (Not case-sensitive)
+     */
     public static ArrayList<UUID> search(String str){
         ArrayList<UUID> foundItems = new ArrayList<>();
         for(HashMap.Entry<UUID,Item> element : map.entrySet()){
@@ -131,6 +125,7 @@ public class Items{
      * Transform le contenu du fichier database en liste afin de pouvoir y traiter les doublons. Pour l'instant, ne retourne rien
      et print la liste pour tester, mais à terme la methode devra retouner la liste afin de la transmettre à une methode de check doublons
      */
+    @Deprecated
     public void transformList() throws IOException {
     try {
       Scanner s = new Scanner(new File("src/main/ressources/database.csv"));
@@ -146,6 +141,49 @@ public class Items{
     }
   }
 
+  /**
+   * Enregistre les articles dans un fichier .txt
+   */
+  public static void writeSave(){
+
+    try {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
+        for(HashMap.Entry<UUID,Item> entry : map.entrySet()){
+            bufferedWriter.write(entry.getKey().toString()+","+entry.getValue().toString());
+            bufferedWriter.newLine();
+        }
+        bufferedWriter.close();
+        } catch (IOException e) {
+        System.out.println(e);
+        }
+    }
+
+  /**
+   * Récupère les articles enregistré dans un .text durant la dernière session
+   */
+  public static void readSave(){
+      
+    Scanner scanner;
+    try{
+        scanner = new Scanner(new FileInputStream(filePath));
+        while(scanner.hasNext()){
+            String[] str = scanner.nextLine().split(",");
+            switch(str[1]){
+                case "VideoGame":
+                    map.put(UUID.fromString(str[0]),new VideoGame(str[2],str[3],str[4],str[5]));
+                    break;
+                case "Album":
+                    map.put(UUID.fromString(str[0]),new Album(str[2],str[3],str[4],str[5]));
+                    break;
+                case "Movie":
+                    map.put(UUID.fromString(str[0]),new Movie(str[2],str[3],str[4],str[5]));
+                    break;
+            }
+        }
+    } catch (FileNotFoundException e) {
+        System.out.println(e);
+    }
+}
 
 
 

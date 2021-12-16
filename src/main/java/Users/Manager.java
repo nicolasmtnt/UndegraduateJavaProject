@@ -10,8 +10,8 @@ import Item.Items;
 
 public final class Manager extends Employee {
 
-    public Manager(String username, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        super(username, password);
+    public Manager(String username, String password, Boolean encrypt) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        super(username, password,encrypt);
     }
 
     private void removeEmployee(String username) throws NoSuchAlgorithmException, UnsupportedEncodingException{
@@ -30,7 +30,7 @@ public final class Manager extends Employee {
     public void interact(String password) throws NumberFormatException, IOException, NoSuchAlgorithmException {
         if(encryptedPassword.verify(password)){
             Boolean running = true;
-            System.out.println(" *********** MENU EMPLOYEE : "+this.username+" (compte dministrateur) *********** \n\n"+
+            System.out.println(" *********** MENU EMPLOYEE : "+this.username+" (compte Administrateur) *********** \n\n"+
                 "Entrez 'help' pour afficher les commandes.");
             nextCommand();
             while(running){
@@ -96,7 +96,7 @@ public final class Manager extends Employee {
                         break;
                     }
             }
-            System.out.println("*********** DECONNEXION DE "+this.username+"  *********** ");
+            System.out.println("*********** DECONNEXION DE "+this.username+" (compte Administrateur) *********** ");
             } else{
                 System.out.println("Mot de passe incorrect");
             }
@@ -118,7 +118,7 @@ public final class Manager extends Employee {
         +" * addEmployee : Ajouter un employé \n"
         +" * removeEmployee : Retirer un employé \n"
         +" * help : Afficher la liste des commandes disponibles\n"
-        +" * exit : Quitter le programme \n"
+        +" * exit : Deconnexion \n"
         );
     }
 
