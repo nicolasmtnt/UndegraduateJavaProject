@@ -121,10 +121,10 @@ public class Employee extends User implements AdminSearchable{
         String annee = inputYear("Quelle est la date de sortie de l'article ?");
         switch (category) {
             case "jeuxvideo":
-                Items.add("videogame", new String[]{title,annee,userInput("Entrez l'éditeur du jeux vidéo : "),userInput("Entrez le developpeur du jeux vidéo : ")});
+                Items.add("videogame", new String[]{title,annee,userInput("Entrez l'éditeur du jeux vidéo : "),userInput("Entrez la plateforme (PC, PS4 ...) : ")});
                 break;
             case "film":
-                Items.add("movie", new String[]{title,annee,userInput("Entrez le nom du réalisateur : "),userInput("Entrez le nom du distributeur : ")});
+                Items.add("movie", new String[]{title,annee,userInput("Entrez le nom du réalisateur : ")});
                 break;
             case "album":
                 Items.add("album", new String[]{title, annee, userInput("Entrez le nom de l'artiste : "), userInput("Entrez le nom du label : ")});

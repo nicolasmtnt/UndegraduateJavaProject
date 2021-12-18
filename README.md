@@ -3,17 +3,18 @@ _**Nicolas Martinet, Valentin Réault, Mohamed Larinouna**_
 
 ![Première modélisation](temporaryModel1.png)
 
+### Utilisation avec Maven
 
-## Telecharger le programme
+Le projet a été réalisé avec Maven
+La classe qui permet d'executer le projet est [App.java](src/main/java/App.java)
 
-- [Télécharger le programme (.jar)](https://github.com/nicolasmtnt/undegraduate-java-project/raw/main/JavaProject.jar)
-
-### Utilisation avec [.jar](JavaProject.jar)
+### Utilisation sans Maven (avec [.jar](JavaProject.jar))
 
 Pour lancer le programme, executer avec le terminal la commande ( dans le directory de la racine du projet)
 ```
 java -jar JavaProject.jar
 ```
+ATTENTION : il faut que cette commande soit entré après que le terminal/console soit dans la racine du répertoire du projet (cd *yourCurrentDirectory*/JavaProject)
 
 
 ## Utilisation avec App.java

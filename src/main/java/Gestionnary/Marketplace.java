@@ -61,7 +61,22 @@ public class Marketplace{
                 map.put(category, new Shelf(category, uuid, quantity, price));
                 Stock.remove(uuid, quantity);
             }
-            System.out.println("Produit mis en vente avec succès");
+        } else{
+            System.out.println("Opération impossible : le nombre d'article en stock n'est pas suffisant");
+        }
+    }
+
+    /**
+     * Comme add() mais adapté à la fonction readSave()
+     */
+    static public void addWrite(UUID uuid, int quantity, double price){
+        if(quantity <= Stock.getValue(uuid)){
+            String category = Items.getValue(uuid).getClassName();
+            try {
+                map.get(category).add(uuid, quantity, price);
+            } catch (NullPointerException e) {
+                map.put(category, new Shelf(category, uuid, quantity, price));
+            }
         } else{
             System.out.println("Opération impossible : le nombre d'article en stock n'est pas suffisant");
         }
@@ -81,7 +96,6 @@ public class Marketplace{
                 map.remove(entry.getKey());
             }
             if(count>0){
-                System.out.println("Élement retiré de la vente avec succès");
                 break;
             }
         }
@@ -164,7 +178,7 @@ public class Marketplace{
             scanner = new Scanner(new FileInputStream(filePath));
             while(scanner.hasNext()){
                 String[] str = scanner.nextLine().split(",");
-                add(UUID.fromString(str[0]), Integer.parseInt(str[1]), Double.parseDouble(str[2]));
+                addWrite(UUID.fromString(str[0]), Integer.parseInt(str[1]), Double.parseDouble(str[2]));
             } 
         } catch (FileNotFoundException e) {
             System.out.println(e);

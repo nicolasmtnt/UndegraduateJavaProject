@@ -13,13 +13,13 @@ public class ShellTest {
 
     @Test
     void testProductCategory() {
-        Movie m = new Movie("Star Wars", "1977", "George Lucas", "Lucasfilm");
+        Movie m = new Movie("Star Wars", "1977", "George Lucas");
         assertEquals("Movie", m.getClassName());
     }
 
     @Test
     void ItemsAdding() throws IOException {
-        Movie m = new Movie("Star Wars", "1977", "George Lucas", "Lucasfilm");
+        Movie m = new Movie("Star Wars", "1977", "George Lucas");
 
         Items.add("album", new String[]{"Dark Side of the Moon", "1988", "Pink Floyd", "Universal"});
         assertEquals(1, Items.map.size());

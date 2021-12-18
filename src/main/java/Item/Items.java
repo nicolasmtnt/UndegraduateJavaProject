@@ -44,8 +44,8 @@ public class Items{
                     break;
 
                 case "movie":
-                    map.put(uuid, new Movie(attributs[0], attributs[1], attributs[2], attributs[3]));
-                    message = uuid.toString() + "," + attributs[0] + "," + attributs[1] + "," + attributs[2] + "," + attributs[3]+"\n";
+                    map.put(uuid, new Movie(attributs[0], attributs[1], attributs[2]));
+                    message = uuid.toString() + "," + attributs[0] + "," + attributs[1] + "," + attributs[2]+"\n";
                     fo.write(message);
                     fo.close();
 
@@ -168,16 +168,20 @@ public class Items{
         scanner = new Scanner(new FileInputStream(filePath));
         while(scanner.hasNext()){
             String[] str = scanner.nextLine().split(",");
-            switch(str[1]){
-                case "VideoGame":
-                    map.put(UUID.fromString(str[0]),new VideoGame(str[2],str[3],str[4],str[5]));
-                    break;
-                case "Album":
-                    map.put(UUID.fromString(str[0]),new Album(str[2],str[3],str[4],str[5]));
-                    break;
-                case "Movie":
-                    map.put(UUID.fromString(str[0]),new Movie(str[2],str[3],str[4],str[5]));
-                    break;
+            if(str.length>1){
+                switch(str[1]){
+                    case "VideoGame":
+                        map.put(UUID.fromString(str[0]),new VideoGame(str[2],str[3],str[4],str[5]));
+                        break;
+                    case "Album":
+                        map.put(UUID.fromString(str[0]),new Album(str[2],str[3],str[4],str[5]));
+                        break;
+                    case "Movie":
+                        map.put(UUID.fromString(str[0]),new Movie(str[2],str[3],str[4]));
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     } catch (FileNotFoundException e) {

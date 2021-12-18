@@ -2,18 +2,18 @@ package Item;
 
 public final class VideoGame extends Item{
     String publisher;
-    String developer;
+    String platform;
     int metascore;
 
-    public VideoGame(String title, String year, String publisher, String developer) {
+    public VideoGame(String title, String year, String publisher, String platform) {
         super(title, year);
         this.publisher = publisher;
-        this.developer = developer;
+        this.platform = platform;
     }
 
     @Override
     public String toString() {
-        return "VideoGame," + title + "," + year + "," + developer + "," + publisher;
+        return "VideoGame," + title + "," + year + "," + publisher + "," + platform;
     }
     
 
