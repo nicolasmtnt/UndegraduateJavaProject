@@ -1,7 +1,8 @@
 # Projet Java-Objet | Gestion d'un magazin
-_**Nicolas Martinet, Valentin Réault, Mohamed Larinouna**_
-
-![Première modélisation](temporaryModel1.png)
+_**Réalisé par :**_
+_**Nicolas Martinet**_
+_**Valentin Réault**_
+_**Mohamed Larinouna**_
 
 ### Utilisation avec Maven
 
@@ -17,7 +18,7 @@ java -jar JavaProject.jar
 ATTENTION : il faut que cette commande soit entré après que le terminal/console soit dans la racine du répertoire du projet (cd *yourCurrentDirectory*/JavaProject)
 
 
-## Utilisation avec App.java
+## Description du fichier
 
 Le code se trouve dans `src/main/java`.
 Composé de :
@@ -28,6 +29,9 @@ Composé de :
 Celle-ci ne prends pas encore en compte la gestion des rayons et de differents magazins
 Aussi la notion d'utilisateur (vendeur, responsable) n'est pas encore programmé
 
+## Réalisatio de test avec Junit
+
+[Dossier de test Junit](src/test/java/com/example) `src/test/java/com/example`
 
 ### Ajouter un article
 
@@ -64,10 +68,4 @@ Ici on ajoute `2` albums `Dark Side of the Moon` au meme prix (Comportement du p
 Stock.toMarketplace("albums", "Dark Side of the Moon", "2010", 2, 9.99);
 ```
 
-## Prochaine modelisation
-
-![Première modélisation](tamporarymodel2.png)
-
-1. Etape en cours de réalisation : construction d'un Shell pour que le responsable du magazin puisse interagir avec le programme de facon plus intuitive (Command Line Interface)
-2. Ajouter la notion d'utilisateur et de panier
-3. À determiner
+![Première modélisation](temporaryModel1.png)

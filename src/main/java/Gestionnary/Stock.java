@@ -88,9 +88,8 @@ public class Stock{
             if (map.get(uuid)<1){
                 map.remove(uuid);
             }
-            System.out.println("Article retiré avec succès.");
         } catch (NullPointerException e){
-            System.out.println("Cette article n'est pas dans la liste");
+            System.out.println("Une erreur c'est produite :Cette article n'est pas dans la liste");
         }
     }
 

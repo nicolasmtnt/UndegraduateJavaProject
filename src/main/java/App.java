@@ -45,7 +45,10 @@ public class App{
         Stock.readSave();
         Marketplace.readSave();
         
-        System.out.println("Entrez 'help' pour afficher les commandes.");
+        System.out.println("Entrez 'help' pour afficher les commandes.\n\n"+
+        "Admin déjà présent : \n"+
+        "nom d'utilisateur = Alice\n"+
+        "mot de passe = admin \n");
         Boolean running = true;
         String in;
         while(running){
