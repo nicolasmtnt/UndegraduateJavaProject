@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 import Users.Cart;
-import Users.Customer;
 import Users.Customers;
 
 public class CustomerTest {
@@ -18,7 +17,6 @@ public class CustomerTest {
         UUID uuid = UUID.randomUUID();
         cart.addProduct(uuid, 10);
         cart.addProduct(uuid, 12);
-        cart.removeProduct(UUID.randomUUID());
     }
 
     @Test

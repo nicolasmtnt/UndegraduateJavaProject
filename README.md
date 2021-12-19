@@ -4,6 +4,8 @@ _**Nicolas Martinet**_
 _**Valentin Réault**_
 _**Mohamed Larinouna**_
 
+![Modelisation Final](FinalModel.jpg)
+
 ### Utilisation avec Maven
 
 Le projet a été réalisé avec Maven

@@ -30,8 +30,12 @@ public class Customer extends User{
         }
     }
 
-    public void displayCart(){
+    public void displayCart() throws IOException{
         this.cart.display();
+    }
+
+    public void displayCartforChange() throws IOException{
+        this.cart.displayforchange();
     }
 
     public void payment(){
@@ -113,6 +117,10 @@ public class Customer extends User{
                         Marketplace.displayClient();
                         nextCommand();
                         break;
+                    case "cart":
+                        displayCartforChange();;
+                        nextCommand();
+                        break;
                     case "changePassword":
                         changePassword(userInput("Entrez nouveau mot de passe : "));
                         nextCommand();
@@ -140,6 +148,7 @@ public class Customer extends User{
         +" * search : Rechercher un article\n"
         +" * buy : Commander les articles dans le panier\n"
         +" * display : Afficher les articles en vente\n"
+        +" * cart : Modifier le panier\n"
         +" * changePassword : Changer votre mot de passe \n"
         +" * help : Afficher la liste des commandes disponibles\n"
         +" * exit : Deconnexion (Les commandes non finalisées sont supprimées) \n"

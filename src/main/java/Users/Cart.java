@@ -1,15 +1,18 @@
 package Users;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 import Gestionnary.Marketplace;
+import Interface.Interactable;
 import Item.Items;
 
 /**
  * Gère le pannier d'un consommateur
  */
-public class Cart{
+public class Cart implements Interactable{
     
     private HashMap<UUID,Integer> shoppingList = new HashMap<>();
 
@@ -29,9 +32,7 @@ public class Cart{
         }
     }
 
-    public void removeProduct(UUID uuid){
-        shoppingList.remove(uuid);
-    }
+
 
     public void changeQuantity(UUID uuid, Integer quantity){
         if(quantity<1){
@@ -43,16 +44,50 @@ public class Cart{
 
     /**
      * Utilisé pour l'intéractin avec le consommateur
+     * @throws IOException
      */
+    public void displayforchange() throws IOException{
+        System.out.println("Articles dans le panier : ");
+        ArrayList<UUID> foundItems = new ArrayList<>();
+        int i = 0;
+        for (HashMap.Entry<UUID,Integer> element : shoppingList.entrySet()) {
+            i++;
+            System.out.println("["+i+"] "+ Items.getValue(element.getKey()) +", qauntité("+element.getValue()+")") ;
+            foundItems.add(element.getKey());
+        }
+        if(foundItems.isEmpty()){
+            System.out.println("Aucun Article dans le panier");
+            return;
+        }
+        String input = userInput("\ndelete : Retirer un élément du panier\n"+
+            "change : changer la quantité d'un article dans le panier\n"+
+            "Entrez une autre valeur quelconque pour quitter\n");
+            try{
+                switch (input) {
+                    case "delete":
+                        shoppingList.remove(foundItems.get(userIntegerInput("Entrez le [numéro] du produit : ")-1));
+                        System.out.println("Panier modifié");
+                        break;
+                    case "change":
+                        changeQuantity(foundItems.get(userIntegerInput("Entrez le [numéro] du produit : ")-1), userIntegerInput("Entrez la nouvelle quantité : "));
+                        System.out.println("Panier modifié");
+                    default:
+                        break;
+                }
+            } catch(IndexOutOfBoundsException e){
+                System.out.println("Erreur : Le nombre entrée ne fait pas partie des valeurs proposées");
+            }
+        }
+    
     public void display(){
         System.out.println("Articles dans le panier : ");
         int i = 0;
         for (HashMap.Entry<UUID,Integer> element : shoppingList.entrySet()) {
             i++;
-            System.out.println("["+i+"] "+ Items.getValue(element.getKey()) +", "+element.getValue()) ;
+            System.out.println("["+i+"] "+ Items.getValue(element.getKey()) +", qauntité("+element.getValue()+")");
         }
     }
-
+    
     public void reset(){
         shoppingList.clear();
     }
@@ -74,4 +109,5 @@ public class Cart{
         }
         return price;
     }
+
 }
