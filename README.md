@@ -1,8 +1,9 @@
 # Projet Java-Objet | Gestion d'un magazin
-_**Réalisé par :**_
-_**Nicolas Martinet**_
-_**Valentin Réault**_
-_**Mohamed Larinouna**_
+<p align="center">
+    Nicolas Martinet, Valentin Réault, Mohamed Larinouna
+</p>
+
+<br/>
 
 ![Modelisation Final](FinalModel.jpg)
 
@@ -19,6 +20,8 @@ java -jar JavaProject.jar
 ```
 ATTENTION : il faut que cette commande soit entré après que le terminal/console soit dans la racine du répertoire du projet (cd *yourCurrentDirectory*/JavaProject)
 
+<br/>
+<br/>
 
 ## Description du fichier
 
@@ -69,5 +72,10 @@ Ici on ajoute `2` albums `Dark Side of the Moon` au meme prix (Comportement du p
 ```
 Stock.toMarketplace("albums", "Dark Side of the Moon", "2010", 2, 9.99);
 ```
+<br/>
+<br/>
+<p align="center">
+  Première modélisation
+</p>
 
 ![Première modélisation](temporaryModel1.png)
