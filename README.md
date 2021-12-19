@@ -30,9 +30,9 @@ Composé de :
 - [La classe App.java](src/main/java/App.java) `src/main/java/App.java`
 - [Le dossier Gestionnary](src/main/java/Gestionnary) `src/main/java/Gestionnary`
 - [Le dossier Item](src/main/java/Item) `src/main/java/Item`
-
-Celle-ci ne prends pas encore en compte la gestion des rayons et de differents magazins
-Aussi la notion d'utilisateur (vendeur, responsable) n'est pas encore programmé
+- [Le dossier Interface](src/main/java/Interface) `src/main/java/Interface`
+- [Le dossier Users](src/main/java/Users) `src/main/java/Users`
+<br/>
 
 ## Réalisatio de test avec Junit
 
