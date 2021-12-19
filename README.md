@@ -18,7 +18,7 @@ Pour lancer le programme, executer avec le terminal la commande ( dans le direct
 ```
 java -jar JavaProject.jar
 ```
-ATTENTION : il faut que cette commande soit entré après que le terminal/console soit dans la racine du répertoire du projet (cd *yourCurrentDirectory*/JavaProject)
+**ATTENTION : il faut que cette commande soit entré après que le terminal/console soit dans la racine du répertoire du projet (cd *yourCurrentDirectory*/JavaProject)**
 
 <br/>
 <br/>
@@ -34,7 +34,7 @@ Composé de :
 - [Le dossier Users](src/main/java/Users) `src/main/java/Users`
 <br/>
 
-## Réalisatio de test avec Junit
+## Réalisation de test avec Junit
 
 [Dossier de test Junit](src/test/java/com/example) `src/test/java/com/example`
 
