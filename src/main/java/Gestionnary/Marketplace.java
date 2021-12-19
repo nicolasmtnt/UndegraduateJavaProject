@@ -30,7 +30,7 @@ public class Marketplace{
     public static void displayClient(){
         System.out.println("Liste des élements en ventes:");
         for (HashMap.Entry<String,Shelf> entry : map.entrySet()) {
-            System.out.println("\n    "+entry.getKey() + " :");
+            System.out.println("\n    "+entry.getKey() + " : ");
             entry.getValue().displayClient();
 
         }
@@ -127,6 +127,17 @@ public class Marketplace{
         int count = 0;
         for(Shelf element: map.values()){
             ArrayList<UUID> foundUUID = element.search(str,count);
+            foundItems.addAll(foundUUID);
+            count+= foundItems.size();
+        }
+        return foundItems;
+    }
+
+    public static ArrayList<UUID> searchForClient(String str){
+        ArrayList<UUID> foundItems = new ArrayList<>();
+        int count = 0;
+        for(Shelf element: map.values()){
+            ArrayList<UUID> foundUUID = element.searchForClient(str,count);
             foundItems.addAll(foundUUID);
             count+= foundItems.size();
         }

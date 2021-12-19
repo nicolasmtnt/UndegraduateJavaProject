@@ -32,7 +32,9 @@ public class Cart implements Interactable{
         }
     }
 
-
+    public Boolean isEmpty(){
+        return shoppingList.isEmpty();
+    }
 
     public void changeQuantity(UUID uuid, Integer quantity){
         if(quantity<1){

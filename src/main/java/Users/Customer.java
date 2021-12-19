@@ -50,7 +50,7 @@ public class Customer extends User{
      * @throws IOException
      */
     public void search() throws NumberFormatException, IOException{
-        UUID uuid = searchMarketplace();
+        UUID uuid = searchMarketplaceForClient();
         if (uuid != null) {
             askCustomerUpponItem(uuid);
         }
@@ -83,6 +83,10 @@ public class Customer extends User{
      * @throws IOException
      */
     public void buyCart() throws IOException{
+        if(cart.isEmpty()){
+            System.out.println("Impossible : Le panier est vide");
+            return;
+        }
         displayCart();
         System.out.println("Prix total : "+ cart.totalPrice()+"€\n");
         System.out.println("Confirmer ? (y/n)");

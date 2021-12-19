@@ -37,18 +37,18 @@ public class Customers{
     }
 
     static public void newCustomer() throws IOException, NoSuchAlgorithmException{
-        String username = userInput("Choisissez un nom d'utilisateur");
+        String username = userInput("Choisissez un nom d'utilisateur : ");
         if(map.containsKey(username)){
             System.out.println("Nom d'utilisateur déjà pris");
             return;
         }
-        String password = userInput("Choisissez un mot de passe");
+        String password = userInput("Choisissez un mot de passe : ");
         add(username, password);
     }
     
     static public void connect() throws NumberFormatException, NoSuchAlgorithmException, IOException{
         try {
-            map.get(userInput("Entrez votre nom d'utilisateur :")).interact(userInput("Entrez votre mot de passe : "));
+            map.get(userInput("Entrez votre nom d'utilisateur : ")).interact(userInput("Entrez votre mot de passe : "));
         } catch (NullPointerException e) {
             System.out.println("Le nom d'utilisateur entré est inconnue");
         }
@@ -56,7 +56,7 @@ public class Customers{
     }
 
     static String userInput(String message) throws IOException{
-        System.out.println(message);
+        System.out.print(message);
         return new BufferedReader(new InputStreamReader(System.in)).readLine();
     }
 

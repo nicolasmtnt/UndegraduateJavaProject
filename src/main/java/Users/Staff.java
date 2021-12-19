@@ -39,7 +39,7 @@ public abstract class Staff{
 
     static public void interact() throws NumberFormatException, NoSuchAlgorithmException, IOException{
         try {
-            map.get(userInput("Entrez votre nom d'utilisateur :")).interact(userInput("Entrez votre mot de passe : "));
+            map.get(userInput("Entrez votre nom d'utilisateur : ")).interact(userInput("Entrez votre mot de passe : "));
         } catch (NullPointerException e) {
             System.out.println("Le nom d'utilisateur entré est inconnue");
         }
@@ -47,7 +47,7 @@ public abstract class Staff{
     }
 
     static String userInput(String message) throws IOException{
-        System.out.println(message);
+        System.out.print(message);
         return new BufferedReader(new InputStreamReader(System.in)).readLine();
     }
     

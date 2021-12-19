@@ -139,6 +139,22 @@ public class Shelf implements Scannable{
         return foundItems;
     }
 
+    public ArrayList<UUID> searchForClient(String str, int count){
+        ArrayList<UUID> foundItems = new ArrayList<>();
+        for(UUID uuid : this.map.keySet()){
+            Item item = Items.getValue(uuid);
+            if(scan(item, str)){
+                foundItems.add(uuid);
+                if((int)this.map.get(uuid)[0] < 5){
+                    System.out.println("["+sum(foundItems.size(),count) +"] "+item.toString()+", prix("+ this.map.get(uuid)[1]+") (Presque épuisé)");
+                } else{
+                    System.out.println("["+sum(foundItems.size(),count) +"] "+item.toString()+", prix("+ this.map.get(uuid)[1]+")");
+                }
+            }
+        }
+        return foundItems;
+    }
+
     public Double getPrice(UUID uuid){
         for (HashMap.Entry<UUID,Number[]> entry : map.entrySet()){
             if(entry.getKey().equals(uuid)){
