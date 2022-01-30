@@ -1,7 +1,4 @@
 # Projet Java-Objet | Gestion d'un magazin
-<p align="center">
-    Nicolas Martinet, Valentin Réault, Mohamed Larinouna
-</p>
 
 <br/>
 
